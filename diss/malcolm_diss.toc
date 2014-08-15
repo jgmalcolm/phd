@@ -1,0 +1,77 @@
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\MakeUppercase {List of Tables} }{vi}{section*.5}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\MakeUppercase {List of Figures} }{vii}{section*.7}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\MakeUppercase {Summary}}{xii}{section*.9}
+\setcounter {tocdepth}{2}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {I}\MakeUppercase {Background}}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Overview of Diffusion Imaging}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Modeling}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Imaging the tissue}{2}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Parametric models}{3}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Nonparametric models}{3}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Regularization}{4}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.5}Characterizing tissue}{5}{subsection.1.2.5}
+\contentsline {section}{\numberline {1.3}Tractography}{6}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Deterministic tractography}{6}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Probabilistic tractography}{7}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Global tractography}{7}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Validation}{9}{subsection.1.3.4}
+\contentsline {section}{\numberline {1.4}Applications}{9}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Volume segmentation}{10}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Fiber clustering}{11}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Connectivity}{12}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}Tissue analysis}{13}{subsection.1.4.4}
+\contentsline {section}{\numberline {1.5}Summary}{13}{section.1.5}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {II}\MakeUppercase {Filtered Tractography}}{19}{chapter.2}
+\contentsline {section}{\numberline {2.1}Summary}{19}{section.2.1}
+\contentsline {section}{\numberline {2.2}Modeling local fiber orientations}{20}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Diffusion tensors}{21}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Watson directional function}{22}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Estimating the fiber model}{24}{section.2.3}
+\contentsline {section}{\numberline {2.4}The algorithm}{27}{section.2.4}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {III}\MakeUppercase {Results}}{29}{chapter.3}
+\contentsline {section}{\numberline {3.1}Tensors}{29}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Synthetic tractography}{31}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Angular resolution}{32}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Estimated quantities}{33}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Volume fractions}{34}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Three-fiber crossings}{35}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}\textit {In vivo}\xspace tractography}{35}{subsection.3.1.6}
+\contentsline {section}{\numberline {3.2}Watson directional functions}{39}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Signal reconstruction and angular resolution}{40}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}\textit {In vivo} tractography}{40}{subsection.3.2.2}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {IV}\MakeUppercase {Weighted Mixtures}}{56}{chapter.4}
+\contentsline {section}{\numberline {4.1}Summary}{56}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}The weighted model}{56}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Constrained estimation}{57}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Experiments}{58}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Synthetic validation}{59}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}\textit {In vivo} tractography}{60}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Summary}{62}{section.4.3}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {V}\MakeUppercase {Validation}}{63}{chapter.5}
+\contentsline {section}{\numberline {5.1}Summary}{63}{section.5.1}
+\contentsline {section}{\numberline {5.2}Results and Discussion}{64}{section.5.2}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {VI}\MakeUppercase {Tract-based Statistical Analysis}}{66}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{66}{section.6.1}
+\contentsline {section}{\numberline {6.2}Introduction}{66}{section.6.2}
+\contentsline {section}{\numberline {6.3}Our contributions}{68}{section.6.3}
+\contentsline {section}{\numberline {6.4}Method}{68}{section.6.4}
+\contentsline {section}{\numberline {6.5}Tractography and fiber comparison}{69}{section.6.5}
+\contentsline {section}{\numberline {6.6}Results}{72}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Synthetic validation}{72}{subsection.6.6.1}
+\contentsline {subsection}{\numberline {6.6.2}\textit {In vivo} model comparison}{73}{subsection.6.6.2}
+\contentsline {section}{\numberline {6.7}Conclusion}{74}{section.6.7}
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {VII}\MakeUppercase {Summary}}{76}{chapter.7}
+\contentsline {chapter}{\MakeUppercase {References}}{78}{section*.51}
+\setcounter {tocdepth}{2}
+\setcounter {tocdepth}{3}
+\setcounter {tocdepth}{2}

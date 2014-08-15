@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
+The top-level auxiliary file: malcolm_proposal.aux
+The style file: gatech-thesis.bst
+Database file #1: references.bib
+You've used 50 entries,
+            2221 wiz_defined-function locations,
+            929 strings with 14019 characters,
+and the built_in function-call counts, 23581 in all, are:
+= -- 2340
+> -- 1005
+< -- 1
++ -- 398
+- -- 344
+* -- 1996
+:= -- 3342
+add.period$ -- 50
+call.type$ -- 50
+change.case$ -- 322
+chr.to.int$ -- 0
+cite$ -- 50
+duplicate$ -- 1156
+empty$ -- 1862
+format.name$ -- 344
+if$ -- 5351
+int.to.chr$ -- 0
+int.to.str$ -- 50
+missing$ -- 49
+newline$ -- 153
+num.names$ -- 100
+pop$ -- 335
+preamble$ -- 1
+purify$ -- 272
+quote$ -- 0
+skip$ -- 887
+stack$ -- 0
+substring$ -- 1571
+swap$ -- 602
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 200
+warning$ -- 0
+while$ -- 200
+width$ -- 52
+write$ -- 497

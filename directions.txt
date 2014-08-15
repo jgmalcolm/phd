@@ -1,0 +1,36 @@
+-- functional network clustering --
+
+Find connection hubs -- affinity between voxel X and voxel Y is the
+number of connecting fibers
+  - we can group voxels for less computational/spatial demand
+  - optionally count only (near) end-point connections or any voxels
+    visited along the way
+
+Problem: cannot run group analysis with AP results.
+However, could still reduce it to tractable smaller set that can be manually paired.
+
+Identifying connection hubs could make healthy/disease connectivity
+studies more tractable later by reducing to a few dozen pairwise
+analyses.
+
+
+
+
+-- filtered SH tractography --
+
+Linear Kalman filtering of coefficients.
+Max provides SH peak detection.
+
+
+
+-- particle filtering --
+
+UKF for local model
+ - just run back-forth for small segment
+PF for global path, sampling
+
+
+
+helicoid model
+UKF estimation
+(why use PF to estimate?)

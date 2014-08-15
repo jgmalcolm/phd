@@ -1,0 +1,1121 @@
+\documentclass[letterpaper,hyperref,12pt]{gatech-thesis}
+\usepackage{amsfonts,amsmath,amssymb,latexsym}
+\usepackage{fixltx2e} % maintain order of floats
+\usepackage{cite,mdwlist}
+\usepackage{color}
+\usepackage{graphicx} \graphicspath{{/Users/malcolm/junk/writeups/fibers/figs/ukf/}
+                                    {/Users/malcolm/junk/writeups/fibers/figs/watson/}
+                                    {/Users/malcolm/junk/writeups/fibers/figs/watson_response/}}
+
+\usepackage[draft]{hyperref}
+\usepackage[all]{hypcap} % hyperref/caption fix -- subfig broken
+\usepackage[font=footnotesize]{subfig}
+\renewcommand{\equationautorefname}{Equation}
+\newcommand{\subfigureautorefname}{Figure}
+\renewcommand{\figureautorefname}{Figure}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\newcommand{\algorithmautorefname}{Algorithm}
+\newcommand{\citet}[1]{\cite{#1}} % since no natbib
+
+\usepackage{algorithm,algorithmic}
+\floatname{algorithm}{Algorithm}
+
+\usepackage{xspace}
+\renewcommand{\deg}{\ensuremath{^\circ}\xspace}
+\renewcommand{\v}[1]{\ensuremath{\mathbf #1}\xspace}
+\newcommand{\rv}[1]{\ensuremath{[\, #1 \,]}\xspace} % row vector
+
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\newcommand{\ie}{\textit{i.e}\onedot}
+\newcommand{\eg}{\textit{e.g}\onedot}
+\newcommand{\etal}{et al\onedot}
+\makeatother
+
+\newcommand{\R}{\ensuremath{\mathbb R}}
+\renewcommand{\S}{\ensuremath{\mathbb S}}
+
+\newcommand{\s}{\v s}
+\newcommand{\bn}[1]{\ensuremath{b\!=\!#1}\xspace}
+\newcommand{\bone}{\bn{1000}}
+\newcommand{\bthree}{\bn{3000}}
+\newcommand{\snr}[1]{SNR $\approx$ #1 dB}
+\renewcommand{\u}{\v u}
+
+% tensor
+\newcommand{\m}{\v m}
+\newcommand{\lx}{{\ensuremath{\lambda_1}} \xspace}
+\newcommand{\ly}{{\ensuremath{\lambda_2}} \xspace}
+
+% UKF
+\newcommand{\norm}[1]{\ensuremath{\|#1\|}}
+\newcommand{\x}{\v x}
+\newcommand{\y}{\v y}
+\newcommand{\X}{\v X}
+\newcommand{\Y}{\v Y}
+
+\title{Filtered Tractography}
+\author{James G. Malcolm}
+\department{Electrical and Computer Engineering}
+
+%% Can have up to six readers, plus principaladvisor and
+%% committeechair. All have the form
+%%
+%%  \reader{Name}[Department][Institution]
+%%
+%% The second and third arguments are optional, but if you wish to
+%% supply the third, you must supply the second. Department defaults
+%% to the department defined above and Institution defaults to Georgia
+%% Institute of Technology.
+
+\principaladvisor{Yogesh Rathi}
+\committeechair{Anthony Yezzi}
+\firstreader{Allen Tannenbaum}
+\secondreader{Patricio Vela}
+
+\degree{Doctor of Philosophy}
+
+\copyrightyear{2009}
+\submitdate{9 October 2009}
+
+\approveddate{Not Yet Approved}
+
+\bibfiles{references}
+
+\figurespagefalse
+
+\tablespagefalse
+\dedicationheadingfalse
+\thesisproposaltrue
+
+\begin{document}
+
+
+
+\bibliographystyle{gatech-thesis}
+\begin{preliminary}
+\contents
+
+
+\begin{summary}
+  Computer vision encompasses a host of computational techniques to process
+  visual information.
+  %
+  Medical imagery is one particular area of application where data comes in
+  various forms: X-rays, ultrasound probes, MRI volumes, EEG recordings, NMR
+  spectroscopy, etc.
+  %
+  This thesis proposal is concerned with techniques for accurate
+  reconstruction of neural pathways from diffusion magnetic resonance imagery
+  (dMRI).
+
+  This proposal introduces a filtered approach to neural tractography.
+  %
+  Existing methods independently estimate the diffusion model at each voxel so
+  there is no running knowledge of confidence in the estimation process.
+  %
+  We propose using tractography to drive estimation of the local diffusion
+  model.
+  %
+  Toward this end, we formulate fiber tracking as recursive estimation: at
+  each step of tracing the fiber, the current estimate is guided by those
+  previous.
+
+  We show preliminary results using a mixture of Watson directional functions
+  to model the diffusion signal.  Compared to conventional techniques, this
+  filtered approach significantly improves the angular resolution at crossings
+  and branchings.  Further, we confirm its ability to trace through regions
+  known to contain such crossing and branching while providing inherent path
+  regularization.
+
+  Future work will extend the technique to various alternative diffusion
+  models and methods of tracing, as well as techniques for the analysis of
+  tracts and validation of connectivity.
+\end{summary}
+
+\end{preliminary}
+
+\chapter{Research Topic}
+
+\section{Introduction}
+The advent of diffusion weighted magnetic resonance imaging has provided the
+opportunity for non-invasive investigation of neural architecture.  Using this
+imaging technique, neuroscientists can determine how neurons originating from
+one region connect to other regions and how well-defined those connections may
+be.  For such studies, the quality of the results relies heavily on the chosen
+fiber representation and the method of reconstructing pathways.
+
+To begin studying the microstructure of fibers, we need a model to interpret
+the diffusion weighted signal.  Such models fall broadly into two categories:
+parametric and nonparametric.
+%
+One of the simplest parametric models is the diffusion tensor which describes
+a Gaussian estimate of the diffusion orientation and strength at each voxel.
+While robust, this model can be inadequate in cases of mixed fiber presence or
+more complex orientations \cite{Alexander2002,Frank2002}.
+%
+To handle more complex diffusion patterns, various parametric models have been
+introduced including mixtures of tensors
+\cite{Alexander2001,Tuch2002,Parker2005,Kreher2005,Peled2006} and directional
+functions \cite{McGraw2006,Kaden2007,Rathi2009mia_w}.  To demonstrate the
+difference that arises, \autoref{fig:sweetness} shows a tracing from the
+center of the corpus callosum.  While a single-tensor model finds only the
+dominant U-shaped structure, multi-fiber methods reveal many of the lateral
+pathways known to exist.
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Single-tensor streamline]{
+    \includegraphics[width=.48\columnwidth]{case01045_1T_tc_sweet}}%
+  \subfloat[Two-component model]{
+    \includegraphics[width=.48\columnwidth]{case01045_2W_tc_sweet}}%
+  \caption{Comparison of tractography using a single-tensor model and the
+    proposed two-component model with filtering.  While the single-tensor
+    model misses many of the lateral branches from the corpus callosum, the
+    filter provides a stable estimate of the two-component model capable of
+    revealing the lateral transcallosal pathways.  Seed region indicated with
+    yellow.}
+  \label{fig:sweetness}
+\end{figure}
+Nonparametric models often provide more information about the diffusion
+pattern.  Instead of estimating a discrete number of fibers as in parametric
+models, nonparametric techniques estimate an oriented distribution function
+(ODF) describing an arbitrary configuration of fibers.
+%
+For this estimation, \citet{Tuch2004} introduced Q-ball imaging to numerically
+compute the ODF via the Funk-Radon transform, and subsequently, the use of
+spherical harmonics simplified the computation with an analytic form
+\cite{Anderson2005,Hess2006,Descoteaux2007mrm}.  Recently, linear Kalman
+filtering was demonstrated for online direct estimation of single-tensor and
+harmonic coefficients \cite{Poupon2008,Deriche2009}.
+%
+Another approach to producing an ODF is to assume a model for the signal
+response of a single-fiber and use spherical deconvolution
+\cite{Jian2007dot,Jansons2003,Tournier2004,Kaden2007,Kumar2008}.  Diffusion
+oriented transforms offer even another alternative \cite{Ozarslan2006}.  A
+good review of both parametric and nonparametric models can be found in
+\cite{Alexander2005nyas,Descoteaux2007}.
+
+
+Based on these models, several techniques attempt to reconstruct pathways.
+%
+Deterministic tractography involves directly following the diffusion pathways.
+In the single tensor model, this means simply following the principal
+diffusion direction \cite{Basser2000}, while multi-fiber models often include
+techniques for determining the number of fibers present or when pathways
+branch \cite{Hagmann2004,Kreher2005,Guo2006}.  Kalman and particle filters
+have been used with single tensor streamline tractography
+\cite{Gossl2002,Bjornemo2002,Zhang2009}, but these are used for path
+regularization and not to estimate the underlying fiber model.  Another
+approach to regularizing single tensor tractography uses a moving least
+squares estimate weighted with the previous tensor \cite{Zhukov2002}.
+%
+In this present study we focus on deterministic techniques, but probabilistic
+methods have also been developed to form connections by sampling
+\cite{Parker2003,Hosey2005,Behrens2007}.
+
+Several studies have specific relevance to this present work because of their
+use of a filtering strategy in either orientation estimation or tractography.
+%
+In extending standard streamline tractography to enhance path regularization,
+\cite{Gossl2002} move curve integration into a linear Kalman filter while
+\cite{Zhukov2002} incorporate a moving least squares estimator.
+%
+Alternatively, one could use a particle filter to place a prior on the
+direction of propagation \cite{Zhang2009}.
+%
+Since these methods model only the position of the fiber, not the local fiber
+model, they are inherently focused on path regularization rather than
+estimating the underlying fiber structure.
+%
+Finally, \cite{Poupon2008} proposed using a linear Kalman filter for online,
+direct estimation of either single-tensor or harmonic coefficients while
+successive diffusion image slices are acquired, while \cite{Deriche2009}
+revisited the technique to account for proper regularization and proposed a
+method to quickly determine optimal gradient set orderings.
+
+
+
+\section{Filtered Tractography}
+
+Of the approaches listed above, nearly all fit the model at each voxel
+independent of other voxels; however, tractography is a causal process: we
+arrive at each new position along the fiber based upon the diffusion found at
+the previous position.
+
+We propose to we treat model estimation and tractography as such by placing
+this process within a causal filter.
+%
+As we examine the signal at each new position, the filter recursively updates
+the underlying local model parameters, provides the variance of that estimate,
+and indicates the direction in which to propagate tractography.
+\autoref{fig:overview} provides an overview of this recursive process.
+\begin{figure}[t]
+  \centering
+  \resizebox{!}{1.8in}{\input{/Users/malcolm/junk/writeups/fibers/figs/ukf/ukf.pstex_t}}
+  \caption{System overview illustrating relation between the neural fibers,
+    the measured scanner signal, and the unscented Kalman filter as it is used
+    to estimate the local model.  At each step, the filter uses its current
+    model state ($\hat{\x}_t$) to predict the observed scanner signal
+    ($\bar{\y}_{t+1|t}$) and then compares that against the actual measured
+    signal ($\y_t$) in order to update its internal model state
+    ($\hat{\x}_{t+1}$).}
+  \label{fig:overview}
+\end{figure}
+
+To begin estimating within a finite dimensional filter, we model the diffusion
+signal using a mixture of Watson functions.  We choose the Watson function
+since it provides a compact representation of the signal parameterized by the
+principal diffusion direction and a scaling parameter describing anisotropy,
+and further allows analytic reconstruction of the oriented diffusion function
+from those parameters \cite{Rathi2009mia_w}.  This enables estimation directly
+from the raw signal without separate preprocessing or regularization.
+%
+Because the signal reconstruction is nonlinear, we use the unscented Kalman
+filter to estimate the model parameters and then propagate in the most
+consistent direction.
+%
+Using causal estimation in this way yields inherent path regularization and
+accurate fiber resolution at crossing angles not found with independent
+optimization.  In a loop, the filter estimates the model at the current
+position, moves a step in the most consistent direction, and then begins
+estimation again.
+%
+Since each iteration begins with a near-optimal solution provided by the
+previous estimation, the convergence of model fitting is improved and many
+local minima are naturally avoided.
+%
+This approach generalizes to arbitrary fiber model with finite dimensional
+parameter space.
+
+\autoref{sec:model} provides the necessary background on modeling the
+measurement signal using directional functions and defines the specific fiber
+model employed in this proposal.  Then, \autoref{sec:estimation} describes how
+this model may be estimated using an unscented Kalman filter.
+
+
+\subsection{Modeling local fiber orientations} \label{sec:model}
+
+In diffusion weighted imaging, image contrast is related to the strength of
+water diffusion, and our goal is to accurately relate these signals to an
+underlying model of fiber orientation.  At each image voxel, diffusion is
+measured along a set of distinct gradients, $\u_1,...,\u_n\in\S^2$ (on the
+unit sphere), producing the corresponding signal,
+$\s=\rv{s_1,...,s_n}^T\in\R^n$.  For voxels containing a mixed diffusion
+pattern, a general weighted formulation may be written as,
+\begin{equation} \label{eq:general_model}
+  s_i = s_0 \sum_j w_j e^{ -b \u_i^T D_j \u_i },
+\end{equation}
+where $s_0$ is a baseline signal intensity, $b$ is an acquisition-specific
+constant, $w_j$ are convex weights, and $D_j$ is a tensor matrix describing a
+diffusion pattern.
+
+Considering a single tensor, we now follow the formulation of Rathi
+\etal\cite{Rathi2009mia_w} to define the Watson directional function which
+approximates the apparent diffusion pattern.  We begin by noting that any
+diffusion tensor $D$ can be decomposed as $D = U \Lambda U^T$, where $U$ is a
+rotation matrix and $\Lambda$ is a diagonal matrix with eigenvalues
+$\{\lambda_1, \lambda_2, \lambda_3\}$.  These eigenvalues determine the shape
+of the tensor:  ellipsoidal, planar, and spherical.  For example, if
+$\lambda_1 > \lambda_2 > \lambda_3$, then the shape is ellipsoidal with the
+major axis of the ellipsoid pointing to the eigenvector corresponding to
+$\lambda_1$.  Intuitively, it represents strong diffusion along that
+particular direction.  When $\lambda_1 = \lambda_2 > \lambda_3$, the shape is
+planar indicating diffusion along orthogonal directions, and finally, when
+$\lambda_1 = \lambda_2 = \lambda_3$, the diffusion is spherical (isotropic).
+
+The most common of these configurations is ellipsoidal with principal
+diffusion direction $\m$ and eigenvalue $\lambda_1$, and hence the first step
+in introducing directional functions is to approximate the tensor by its first
+eigenvector expansion: $D \approx \lambda_1 \m \m^T$.  Using this, each
+exponent in \autoref{eq:general_model} may then be rewritten,
+\begin{eqnarray} \label{eq:approx}
+  -b \u_i^T D \u_i
+  &\approx& -b\lambda_1\u_i^T\left(\m\m^T\right)\u_i \\
+  &=& -b \lambda_1 \left(\u_i^T \m\right)^2 \\
+  &=& -k \left(\u_i^T \m\right)^2 ,
+\end{eqnarray}
+where the scalar $k$ concentration parameter determines the degree of
+anisotropy.  Finally, the general model may be restated:
+\begin{equation} \label{eq:watson_model}
+  s_i = A \sum_j w_j e^{-k_j (\u_i^T \m_j)^2} ,
+\end{equation}
+where $A$ is a normalization constant such that $\norm{\s}=1$.  For purposes
+of comparison, this normalization will also be done to signals obtained from
+scanner.  Note that, while the diffusion tensor requires six parameters, these
+Watson functions require four parameters: three for the orientation vector
+$\m$ and one concentration parameter $k$.  Employing a spherical
+representation can further reduce the unit vector \m to two spherical
+coordinates.  \autoref{fig:watson_k} demonstrates how adjusting the $k$-value
+produces different diffusion patterns, and \autoref{fig:watson_multi}
+illustrates two multi-fiber configurations.
+\begin{figure}[t]
+  \centering
+  \subfloat[Reconstructed signals for strong diffusivity ($k=2$), weak
+  diffusivity ($k=0.5$), and isotropic diffusion patterns ($k=0.01$).]{
+    \label{fig:watson_k}
+    \includegraphics[width=.19\columnwidth]{watson_strong}%
+    \includegraphics[width=.19\columnwidth]{watson_weak}%
+    \includegraphics[width=.19\columnwidth]{watson_iso}}%
+  \hspace{1em}%
+  \subfloat[Signals for two-fiber and three-fiber mixtures.]{
+    \label{fig:watson_multi}
+    \includegraphics[width=.19\columnwidth]{watson_two}%
+    \includegraphics[width=.19\columnwidth]{watson_three}}
+  \caption{Watson directional functions are capable of representing various
+    diffusion patterns and fiber orientations.}
+  \label{fig:watson}
+\end{figure}
+
+From this general mixture model, we choose to start with a restricted form
+involving two equally-weighted Watson functions.  This choice is guided by
+several previous studies.
+%
+Behrens \etal\cite{Behrens2007} showed that at a $b$-value of 1000 ms/mm$^2$
+the maximum number of detectable fibers is two.  Several other studies have
+also found two-fiber models to be sufficient
+\cite{Tuch2002,Kreher2005,Zhan2006,Peled2006}.  Using this as a practical
+guideline, we started with a mixture of two Watson functions as our local
+fiber model.
+%
+\comment{Also, we assume the shape of each tensor to be ellipsoidal, \ie there
+  is one dominant principal diffusion direction \m with eigenvalue \lx and the
+  remaining orthonormal directions have equal eigenvalues $\ly=\lambda_3$
+  \cite{Friman2006}.}
+%
+Further, following the study of \cite{Zhan2006}, we assume an equal
+combination (50\%-50\%) of the two Watson functions.  While the effect of this
+second choice appears to have little to no effect on experiments, we have yet
+to quantify any potential loss in accuracy.  These assumptions leave us with
+the following two-fiber model used in this study:
+\begin{equation} \label{eq:model_2W}
+  s_i = \frac{A}{2} \left(e^{ -k_1 (\u_i^T \m_1)^2 } + e^{ -k_2 (\u_i^T \m_2)^2 } \right) .
+\end{equation}
+where $k_1$ and $\m_1$ parameterize the first Watson function, $k_2$ and
+$\m_2$ parameterize the second, and $A$ is again a normalization constant such
+that $\norm{\s}=1$.  Thus, the equally-weighted two-fiber model is fully
+described by the following parameters: $k_1$, $\m_1$, $k_2$, $\m_2$.
+\comment{Extending off the two-Watson model, we can directly formulate the
+  equally-weighted three-Watson model:
+\begin{equation}   \label{eq:model_3W}
+  s_i = \frac{A}{3} \sum_{j=1}^3 e^{-k_j (\u_i^T \m_j)^2} ,
+\end{equation}
+with the additional parameters $k_3$ and $\m_3$.}
+
+Finally, from such parameters, Rathi \etal\cite{Rathi2009mia_w} describe how
+one may compute the ODF analytically by applying the Funk-Radon transform
+directly to \autoref{eq:watson_model}.  The ODF can be reconstructed directly
+from the same parameters describing the signal without a separate estimation
+process.  For the two-Watson model (\autoref{eq:model_2W}) the ODF is
+approximated by,
+\begin{equation} \label{eq:model_2W_odf}
+  f_i = \frac{B}{2} \left(e^{ -\tfrac{k_1}{2} (1-(\u_i^T \m_1)^2) }
+                        + e^{ -\tfrac{k_2}{2} (1-(\u_i^T \m_2)^2) } \right) ,
+\end{equation}
+\comment{and for the three-Watson model (\autoref{eq:model_3W}) this becomes,
+\begin{equation}   \label{eq:model_3W_odf}
+  f_i = \frac{B}{3} \sum_{j=1}^3 e^{-\tfrac{k_j}{2} (1-(\u_i^T \m_j)^2) } ,
+\end{equation}}
+where $B$ is a normalization factor such that $\sum_i f_i = 1$.
+
+
+
+\subsection{Estimating the fiber model} \label{sec:estimation}
+
+Given the measured scanner signal at a particular voxel, we want to estimate
+the underlying model parameters that explain this signal.  As in streamline
+tractography, we treat the fiber as the trajectory of a particle which we
+trace out.  At each step, we examine the measured signal at that position,
+estimate the underlying model parameters, and propagate forward in the most
+consistent direction.  \autoref{fig:overview} illustrates this filtering
+process.
+
+To use a state-space filter for estimating the model parameters, we need the
+application-specific definition of four filter components:
+\begin{enumerate*}
+\item The system state \x: the model parameters
+\item The state transition $f[\cdot]$: how the model changes as we trace the fiber
+\item The observation $h[\cdot]$: how the signal appears given a particular state
+\item The measurement \y: the actual signal obtained from the scanner
+\end{enumerate*}
+For our state, we directly use the model parameters, thus the two-fiber model
+in \autoref{eq:model_2W} has the following state vector:
+\begin{equation} \label{eq:state}
+  \x = \rv{\m_1 \;\; k_1 \;\; \m_2 \;\; k_2 }^T,
+  \quad
+  \m \in \S^2, k \in \R .
+\end{equation}
+While each $\m$ could be represented in a reduced spherical form, the
+antipodes of the spherical parameterization would then introduce
+nonlinearities which complicate estimation.
+%
+For the state transition we assume identity dynamics; the local fiber
+configuration does not undergo drastic change from one position to the next.
+Our observation is the signal reconstruction, $\y=\s=\rv{s_1,...,s_n}^T$ using
+$s_i$ from \autoref{eq:model_2W}, and our measurement is the actual signal
+interpolated directly from the diffusion weighted images at the current
+position.
+
+Since the signal reconstruction is a nonlinear process, we employ an unscented
+Kalman filter to perform nonlinear estimation.  Similar to classical linear
+Kalman filtering, the unscented version seeks to reconcile the predicted state
+of the system with the measured state and addresses the fact that those two
+processes (prediction and measurement) may be nonlinear or unknown.  It does
+this in two phases:  first it uses the system transition model to predict the
+next state and observation, and then it uses the new measurement to correct
+that state estimate.  In what follows, we present the algorithmic application
+of the filter.  For more thorough treatments, see \cite{Julier2004,Merwe2003}.
+
+It is important to note two alternative techniques for nonlinear estimation.
+%
+First, particle filters are commonly used to provide a multi-modal estimate of
+unknown systems.  With respect to an $n$-dimensional state space, particle
+filters require the number of particles to be exponential to properly explore
+the state space.  In contrast, the unscented filter requires only $2n+1$
+particles (sigma points) for a Gaussian estimate that space.  Further, for
+many slowly varying systems, the multi-modal estimate is unnecessary:  from
+one voxel to the next, fibers tend not to change direction drastically.
+%
+Second, an extended Kalman filter may also be used to provide a Gaussian
+estimate after linearizing the system; however, the unscented Kalman filter
+provides a more accurate estimate with equivalent computational cost and
+altogether avoids the attempt at linearization
+\cite{Julier2004,Merwe2003,Lefebvre2004}.
+
+
+Suppose the system of interest is at time $t$ and we have a Gaussian estimate
+of its current state with mean, $\x_t \in \R^n$, and covariance, $P_t \in
+\R^{n \times n}$.  Prediction begins with the formation of a set
+$\X_t=\{\x_i\} \subset \R^n$ of $2n+1$ \textit{sigma point} states with
+associated convex weights, $w_i \in \R$, each a perturbed version of the
+current state.  We use the covariance, $P_t$, to distribute this set:
+\begin{equation*}
+  \x_0 = \x_t
+  \qquad
+  w_0 = \kappa/(n+\kappa)
+  \qquad
+  w_i = w_{i+n} = \tfrac{1}{2(n+\kappa)}
+\end{equation*}
+\begin{equation}   \label{eq:sigma_points}
+  \x_{i}   = \x_t + \left[\sqrt{(n+\kappa)P_t}\right]_i
+  \quad
+  \x_{i+n} = \x_t - \left[\sqrt{(n+\kappa)P_t}\right]_i
+\end{equation}
+where $[A]_i$ denotes the $i^\text{th}$ column of matrix $A$ and $\kappa$ is
+an adjustable scaling parameter ($\kappa = 0.01$ in all experiments).  Next,
+this set is propagated through the state transition function, $\hat{\x}=f[\x]
+\in \R^n$, to obtain a new predicted sigma point set:
+$\X_{t+1|t}=\{f[\x_i]\}=\{\hat{\x}_i\}$.  Since in this study we assume the
+fiber configuration does not change drastically as we follow it from one voxel
+to the next, we may write this identity transition as, $\x_{t+1|t} = f[\x_t] =
+\x_t $.  These are then used to calculate the predicted system mean state and
+covariance,
+\begin{equation*}
+  \bar{\x}_{t+1|t} = \sum_i w_i ~ \hat{\x}_i ,
+\end{equation*}
+\begin{equation} \label{eq:Pxx}
+  P_{xx} = \sum_i w_i \left(\hat{\x}_i - \bar{\x}_{t+1|t}\right)
+                     \left(\hat{\x}_i - \bar{\x}_{t+1|t}\right)^T
+           + Q ,
+\end{equation}
+where $Q$ is the injected process noise bias used to ensure a non-null spread
+of sigma points and a positive-definite covariance.  This procedure comprises
+the \textit{unscented transform} used to estimate the behavior of a nonlinear
+function: spread sigma points based on your current uncertainty, propagate
+those using your transform function, and measure their spread.
+
+To obtain the predicted observation, we again apply the unscented transform
+this time using the predicted states, $\X_{t+1|t}$, to estimate what we expect
+to observe from the hypothetical measurement of each state:
+$\y=h[\hat{\x}] \in \R^m$.  Keep in mind that, for this study, our
+observation is the signal reconstruction from \autoref{eq:model_2W}, and the
+measurement itself is the diffusion-weighted signal, $\s$, interpolated at the
+current position.  From these, we obtain the predicted set of observations,
+$\Y_{t+1|t} = \{ h[\hat{\x}_i] \} = \{ \y_i \}$, and may calculate its
+weighted mean and covariance,
+\begin{equation*}
+  \bar{\y}_{t+1|t} = \sum_i w_i ~ \hat{\y}_i ,
+\end{equation*}
+\begin{equation} \label{eq:Pyy}
+  P_{yy} = \sum_i w_i \left(\hat{\y}_i - \bar{\y}_{t+1|t}\right)
+                     \left(\hat{\y}_i - \bar{\y}_{t+1|t}\right)^T
+           + R ,
+\end{equation}
+where $R$ is the injected measurement noise bias again used to ensure a
+positive-definite covariance.  The cross correlation between the estimated
+state and measurement may also be calculated:
+\begin{equation} \label{eq:Pxy}
+  P_{xy} = \sum_i w_i \left(\hat{\x}_i - \bar{\x}_{t+1|t}\right)
+                     \left(\hat{\y}_i - \bar{\y}_{t+1|t}\right)^T .
+\end{equation}
+
+\begin{algorithm}[t]
+  \setlength\abovedisplayskip{2pt}
+  \setlength\belowdisplayskip{2pt}
+  \caption{Unscented Kalman Filter}
+  \label{alg:ukf}
+  \begin{algorithmic}[1]
+    \STATE Form weighted sigma points $\X_t=\{w_i, \x_i\}_{i=0}^{2n}$ around
+    current mean $\x_t$ and covariance $P_t$ with scaling factor $\zeta$
+    \begin{equation*}
+      \x_0 = \x_t
+      \qquad
+      \x_i    = \x_t + [\sqrt{\zeta P_t}]_i
+      \qquad
+      \x_{i+n} = \x_t - [\sqrt{\zeta P_t}]_i
+    \end{equation*}
+    \STATE Predict the new sigma points and observations
+    \begin{equation*}
+      \X_{t+1|t} = f[\X_t]   \qquad   \Y_{t+1|t} = h[\X_{t+1|t}]
+    \end{equation*}
+    \STATE Compute weighted means and covariances, \eg
+    \begin{equation*}
+      \bar{\x}_{t+1|t} = \sum_i w_i ~ \x_i
+      \qquad
+      P_{xy} = \sum_i w_i (\x_i - \bar{\x}_{t+1|t})(\y_i - \bar{\y}_{t+1|t})^T
+    \end{equation*}
+    \STATE Update estimate using Kalman gain $K$ and scanner measurement
+    $\y_t$
+    \begin{equation*}
+      K = P_{xy}P_{yy}^{-1}
+      \qquad
+      \x_{t+1} = \bar{\x}_{t+1|t} + K(\y_t - \bar{\y}_{t+1|t})
+      \qquad
+      P_{t+1} = P_{xx} - K P_{yy} K^T
+    \end{equation*}
+  \end{algorithmic}
+\end{algorithm}
+As is done in the classic linear Kalman filter, the final step is to use the
+Kalman gain, $K = P_{xy}P_{yy}^{-1}$, to correct our prediction and provide us
+with the final estimated system mean and covariance,
+\begin{equation} \label{eq:x_}
+  \x_{t+1} = \bar{\x}_{t+1|t} + K(\y_t - \bar{\y}_{t+1|t})
+\end{equation}
+\begin{equation} \label{eq:P_}
+  P_{t+1} = P_{xx} - K P_{yy} K^T ,
+\end{equation}
+where $\y_t \in \R^m$ is the actual signal measurement taken at this time.
+\autoref{alg:ukf} summarizes this algorithm for unscented Kalman filtering.
+
+
+
+\subsection{The algorithm} \label{sec:alg}
+
+To summarize the proposed technique, we are using the unscented Kalman filter
+to estimate the local model parameters as we trace out each fiber.  For each
+fiber, we maintain the position at which we are currently tracing it and the
+current estimate of its model parameters (mean and covariance).  At each
+iteration of the algorithm, we predict the new state, which in this case is
+simply identity:  $\x_{t+1|t}=\x_t$.  Our actual measurement $\y_t$ in
+\autoref{eq:x_} is the diffusion-weighted signal, \s, recorded by the scanner
+at this position.  At subvoxel positions we interpolate directly on the
+diffusion-weighted images.  With these, we step through the equations above to
+find the new estimated model parameters, $\x_{t+1}$.  Last, we use
+second-order Runge-Kutta integration to move a small step in the most
+consistent of principal diffusion directions, and then we repeat these steps
+from that new location.  \autoref{alg:loop} outlines the integration of
+filtering and tractography.
+\begin{algorithm}[t]
+  \setlength\abovedisplayskip{2pt}
+  \setlength\belowdisplayskip{2pt}
+  \caption{Main loop repeated for each fiber}
+  \label{alg:loop}
+  \begin{algorithmic}[1]
+    \REPEAT
+      \STATE Form the sigma points $\X_t$ around $\x_t$
+      \STATE Predict the new sigma points $\X_{t+1|t}$ and observations
+      $\Y_{t+1|t}$
+      \STATE Compute weighted means and covariances, \eg $\bar{\x}_{t+1|t}$, $P_{xy}$
+      \STATE Update estimate ($\x_{t+1}$, $P_{t+1}$) using scanner
+      measurement ($\y_t$)
+      \STATE Proceed in most consistent direction $\m_j$
+    \UNTIL{estimated model appears isotropic}
+  \end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+
+\chapter{Preliminary Results}
+
+We first use experiments with synthetic data to validate our technique against
+ground truth.  We confirm that our approach accurately estimates the true
+underlying signal and reliably recognizes crossing fibers over a broad range
+of angles.  Comparing against two alternative multi-fiber optimization
+techniques, we find the filtered approach gives consistently superior results
+in both respects (\autoref{sec:mse_angle}).
+%
+Next, we perform tractography through crossing fiber fields and examine the
+underlying orientations and branchings (\autoref{sec:tracts}).
+%
+Lastly, we examine a real dataset to demonstrate how causal estimation is able
+to pick up fibers and branchings known to exist \textit{in vivo} yet absent
+using other techniques (\autoref{sec:real}).
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Ground truth signal and ODF (\bone, \bthree).]{
+    \label{fig:samples_pure}
+    \includegraphics[width=.24\columnwidth]{samples_b1000_pure}%
+   \includegraphics[width=.24\columnwidth]{samples_b3000_pure}}%
+  \subfloat[Low- and high-noise signals (\bone, \bthree).]{
+    \label{fig:samples_noisy}
+    \includegraphics[width=.24\columnwidth]{samples_b1000_noisy}%
+   \includegraphics[width=.24\columnwidth]{samples_b3000_noisy}}
+  \caption{Synthetic two-fiber voxel signals at a 60\deg angle \textit{(black
+      wires indicate principal diffusion directions)}.  Each column shows the
+    same surface from two viewpoints.  \subref{fig:samples_pure} shows the
+    ground truth signal and corresponding true ODF \textit{(left to right)}.
+    \subref{fig:samples_noisy} shows the corrupted versions of the ground
+    truth signal \textit{(left to right)}.}
+  \label{fig:samples}
+\end{figure}
+Following the experimental method of generating synthetic data found in
+\cite{Tournier2004,Descoteaux2009tmi,Schultz2008}, we pull from our real data
+set the 300 voxels with highest fractional anisotropy (FA) and compute the
+average eigenvalues among these voxels:  $\{1200, 100, 100\}\mu$m$^2$/msec
+(FA=0.91).  We generated synthetic MR signals according to
+\autoref{eq:general_model} using these eigenvalues to form an anisotropic
+tensor at both \bone and \bthree, using 81 gradient directions uniformly
+spread on the hemisphere, and assume $s_0=1$.  We generate two separate data
+sets, each with a different level of Rician noise: low-noise ($\sigma=0.1$,
+\snr{10}) and high-noise ($\sigma=0.2$, \snr{5}).  To get an idea of this
+level of noise, \autoref{fig:samples} visualizes a sample voxel with two
+fibers at a 60\deg angle.
+
+\begin{figure}[t]
+  \centering
+  \subfloat[\bone]{
+    \includegraphics[width=.24\columnwidth]{mse_2W_b1000_clean}%
+    \includegraphics[width=.24\columnwidth]{mse_2W_b1000_dirty}}%
+  \subfloat[\bthree]{
+    \includegraphics[width=.24\columnwidth]{mse_2W_b3000_clean}%
+    \includegraphics[width=.24\columnwidth]{mse_2W_b3000_dirty}}
+  \caption{Mean squared error (MSE) between reconstructed signal and ground
+    truth signal at various crossing angles \textit{(low-noise on left,
+      high-noise on right)}.  Notice how the increased noise has little effect
+    on the filter \textit{(black)} compared to using matching pursuit
+    \textit{(blue)} or sharpened spherical harmonics \textit{(red)}.}
+  \label{fig:mse}
+\end{figure}
+Throughout the experiments, we draw comparison to three alternative
+techniques.
+%
+First, we use the same two-Watson model from \autoref{sec:model} with a
+variant of matching pursuit for brute force, dictionary-based optimization
+\cite{Mallat1993}.  In our implementation, we construct a finite dictionary of
+two-Watson signals at a range of various $k$-values, essentially discretizing
+the search space across orientations and $k$-values.  Given a new measured
+signal, the signal from the dictionary with highest inner product provides an
+estimate of orientation and concentration.  While our signal is produced at 81
+gradient directions, we use 341 directions to construct the dictionary, thus
+any error is due to the method's sensitivity to noise and discretization.
+Note that by using 341 orientation directions there is roughly an 8\deg
+angular difference between offset orientations, hence we see that the angular
+error is often at most 8\deg.  This approach highlights the effect of using
+the same model but changing the optimization technique to one that treats each
+voxel independently.
+%
+Second, we use spherical harmonics for modeling \cite{Tournier2004} and
+fiber-ODF sharpening for peak detection as described in \cite{Descoteaux2009tmi}
+(order $l=8$, regularization $L=0.006$).  This provides a comparison with an
+independently estimated, model-free representation.  Note that this technique
+is very similar to spherical deconvolution.
+%
+Last, when performing tractography on real data, we use single-tensor
+streamline tractography as a baseline\footnote{Using the freely available
+  Slicer 2.7 (\url{http://www.slicer.org}).}.
+
+\begin{figure*}[t]
+  \centering
+  \subfloat[Matching pursuit, \bone]{ \label{fig:angle_2W_MP_1000}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b1000_PP_clean}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b1000_PP_dirty}}%
+  \subfloat[Matching pursuit, \bthree]{ \label{fig:angle_2W_MP_3000}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b3000_PP_clean}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b3000_PP_dirty}}
+  \subfloat[Spherical harmonics, \bone]{ \label{fig:angle_2W_SH_1000}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b1000_SH_clean}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b1000_SH_dirty}}%
+  \subfloat[Spherical harmonics, \bthree]{ \label{fig:angle_2W_SH_3000}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b3000_SH_clean}
+    \includegraphics[width=.24\columnwidth]{angle_2W_b3000_SH_dirty}}
+  \caption{Average angle error at various crossing angles comparing all three
+    techniques: matching pursuit \textit{(blue)}, sharpened spherical
+    harmonics \textit{(red)}, and the proposed filter \textit{(black)}.  The
+    filter provides stable and consistent estimation compared to either
+    alternative technique.  Each subfigure shows both the low-noise and
+    high-noise experiments \textit{(left, right)}.}
+  \label{fig:angle}
+\end{figure*}
+The unscented Kalman filter conveniently requires few parameters.
+Specifically, of importance are the matrices for injecting model noise $Q$ and
+injecting measurement noise $R$ (see \autoref{eq:Pxx} and \autoref{eq:Pyy}).
+Fortunately, the relative magnitude of each can be determined off-line from
+the data itself.  We found that values on the order of $q_\m = 0.001$ (roughly
+2\deg), $q_\lambda = 10$, and $r_s=0.02$ were quite robust for the appropriate
+diagonal entries of $Q$ and $R$.  Off-diagonal entries were left at zero.
+
+
+
+\section{Signal reconstruction and angular resolution}  \label{sec:mse_angle}
+
+While the independent optimization techniques can be run on individually
+generated voxels, care must be taken in constructing reasonable scenarios to
+test the causal filter.  For this purpose, we constructed an actual 2D field
+through which to navigate (see \autoref{fig:single_fiber} and
+\autoref{fig:crossing}).  In the middle is one long fiber pathway where the
+filter begins estimating a single component but then runs into a field of
+voxels with two crossed fibers at a fixed angle.  In this crossing region we
+calculated error statistics.  Similarly, we computed the angular error over
+this region using both sharpened spherical harmonics and matching pursuit.  We
+generated several similar fields, each at a different fixed angle.  By varying
+the size of the crossing region or the number of fibers run, we ensured that
+each technique performed estimation on at least 500 voxels.
+
+In the first experiment, we look at signal reconstruction error.  We calculate
+the mean squared error of the reconstructed signal, \s, against the ground
+truth signal, $\hat{\s}$ (pure, no noise): $ \norm{\s - \hat{\s}}^2 /
+\norm{\hat{\s}}^2$.  In essence, this is exactly what the filter is trying to
+minimize: the error between the reconstructed signal and the measured signal.
+\autoref{fig:mse} shows the results of using the proposed filter, matching
+pursuit, and spherical harmonics.  Over each technique's series of
+estimations, the trendlines indicate the mean error while the bars indicate
+one standard deviation.  Spherical harmonics \textit{(red)} appear to produce
+a smooth fit to the given noisy data, while matching pursuit \textit{(blue)}
+shows the effect of discretization and sensitivity to noise.  The two raised
+areas are a result of the dictionary being constructed with an 8\deg minimum
+separation between any pair of orientations.  This experiment demonstrates
+that the proposed filter \textit{(black)} accurately and reliably estimates
+the true underlying signal.
+
+In the second experiment, we looked at the error in angular resolution by
+comparing the filtered approach to matching pursuit and sharpened spherical
+harmonics.  \autoref{fig:angle_2W_MP_1000} and \autoref{fig:angle_2W_MP_3000}
+show the sensitivity of matching pursuit.  Consistent with the results
+reported in \cite{Descoteaux2009tmi,Descoteaux2007mrm}, spherical harmonics are
+generally unable to detect and resolve angles below 50\deg for \bone or below
+40\deg for \bthree.  \autoref{fig:angle_2W_SH_1000} and
+\autoref{fig:angle_2W_SH_3000} confirm this, respectively.  This experiment
+demonstrates that for \bone, the filtered approach consistently resolves
+angles down to 20-30\deg with 5\deg error compared to independent optimization
+which fails to reliably resolve below 60\deg with as much as 15\deg error.
+For \bthree, the filtered approach consistently resolves down to 20-30\deg
+with 2-3\deg error compared to independent optimization which cannot resolve
+below 50\deg with 5\deg error.
+
+
+
+
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.5\columnwidth]{compare_b3000_2W}
+  \caption{Fiber passing through 40\deg, 50\deg, and 60\deg synthetic
+    crossings (\bthree, noisy).  Blue dashes represent the orientation of the
+    second fiber when detected.}
+  \label{fig:single_fiber}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \subfloat[Fiber passing through 60\deg synthetic crossing.]{
+    \label{fig:crossing}
+    \includegraphics[width=.3\columnwidth]{compare_tract_b1000_2W}}%
+  \subfloat[Estimated ODFs along fiber.]{
+    \label{fig:zooms}
+    \includegraphics[width=.3\columnwidth]{compare_tract_b1000_2W_zoom}}
+  \caption{One fiber passing through an example synthetic field (\bone, noisy)
+    and the estimated ODFs using spherical harmonics and the filter as it
+    passes through the crossing region \textit{(blue box)}.  The filter
+    provides consistent angular resolution along the fiber while independent
+    spherical harmonic modeling at those same locations misses the second
+    fiber in two voxels.}
+\end{figure}
+
+
+\section{Synthetic tractography}  \label{sec:tracts}
+
+\begin{figure*}[t]
+  \centering
+  \subfloat[Single-tensor]{ \label{fig:1T_tc}%
+    \includegraphics[width=.5\columnwidth]{case01045_1T_tc}}%
+  \subfloat[Spherical harmonics]{ \label{fig:SH_tc}%
+    \includegraphics[width=.5\columnwidth]{case01045_SH_tc}}
+
+  \subfloat[Filtered two-Watson]{ \label{fig:2W_tc}%
+    \includegraphics[width=.5\columnwidth]{case01045_2W_tc}}%
+  \subfloat[Closeup of upper right in \subref{fig:2W_tc}.]{ \label{fig:2W_zoom_tc}%
+    \includegraphics[width=.5\columnwidth]{case01045_2W_tc_zoom}}
+  \caption{Filtered tractography picks up many fiber paths consistent with the
+    underlying structures.  Both single-tensor streamline and sharpened
+    spherical harmonics are unable to find the majority of these pathways.
+    Fibers existing $\pm22\,\text{mm}$ around the mid-sagittal plane are
+    indicated in blue.  Seed region indicated in yellow.}
+  \label{fig:tc}
+\end{figure*}
+Having verified the technique's accuracy, we now turn to the resulting
+tractography.  \autoref{fig:single_fiber} provides examples of synthetic
+crossing fiber fields each at different fixed angles: 40\deg, 50\deg, 60\deg
+(\bthree, noisy).  In our experiments, we start fibers from the bottom and
+propagate upward where they encounter the crossing region.  Here we show one
+such fiber and use blue glyphs to indicate the second component detected as
+the it passes through the crossing region.  In general, we found that in
+regions with only one true fiber present (those outside the crossing), the
+second component either aligned with the first or adjusted its concentration
+parameter to fill out the isotropic component of the signal.  Further, we
+found the filtering strategy to be robust with respect to initial
+configuration and choice of injected noise matrices $Q$ and $R$
+(\autoref{eq:Pxx} and \autoref{eq:Pyy}).
+
+In \autoref{fig:crossing} we show another 60\deg field (\bone, noisy) but take
+a closer look at several points along a single fiber as it passes through the
+crossing region.  We also examine the corresponding ODFs reconstructed using
+sharpened spherical harmonics and the proposed filter.  As expected, the
+sharpened spherical harmonics often do not detect the crossing but result in a
+single angle as seen in the middle two samples in \autoref{fig:zooms}.  A
+close examination of the reported axes shows the bias toward a single averaged
+axis as reported in \cite{Zhan2006,Tournier2007,Schultz2008}.  In contrast,
+the filtered results are consistent and accurate.
+
+
+
+\section{\textit{In vivo} tractography}  \label{sec:real}
+
+We tested our approach on a real human brain scan acquired on a 3-Tesla GE
+system using an echo planar imaging (EPI) diffusion weighted image sequence.
+A double echo option was used to reduce eddy-current related distortions.  To
+reduce impact of EPI spatial distortion, an eight channel coil was used to
+perform parallel imaging using Array Spatial Sensitivity Encoding Techniques
+(GE) with a SENSE-factor (speed-up) of 2.  Acquisitions have 51 gradient
+directions with \bn{900} and eight baseline scans with \bn{0}.  The original
+GE sequence was modified to increase spatial resolution, and to further
+minimize image artifacts.  The following scan parameters were used: TR 17000
+ms, TE 78 ms, FOV 24 cm, 144x144 encoding steps, 1.7 mm slice thickness. All
+scans had 85 axial slices parallel to the AC-PC line covering the whole brain.
+In addition, \bn{0} field inhomogeneity maps were collected and calculated.
+
+We first focused on fibers originating in the corpus callosum.  Specifically,
+we sought to trace out the lateral transcallosal fibers that run through the
+corpus callosum out to the lateral gyri.  It is known that single-tensor
+streamline tractography only traces out the dominant pathways forming the
+U-shaped callosal radiation (\autoref{fig:1T_tc} and \autoref{fig:1T_cc}).
+Several studies document this phenomena, among them the works of Descoteaux
+\etal\cite{Descoteaux2009tmi} and Schultz and Seidel \cite{Schultz2008} have
+side-by-side comparisons.  These fibers have been reported in using diffusion
+spectrum imaging \cite{Hagmann2004}, probabilistic tractography
+\cite{Kaden2007,Anwander2007,Descoteaux2009tmi}, and more recently with tensor
+decomposition \cite{Schultz2008}.
+
+
+We start with two basic experiments:  first examining the tracts surrounding a
+single coronal slice and second looking at all tracts passing through the
+corpus callosum.  We seed each algorithm multiple times in voxels at the
+intersection of the mid-sagital plane and the corpus callosum.  To explore
+branchings found using the proposed technique, we considered a component to be
+branching if it was separated from the primary component by less than 40\deg
+with $k\ge0.6$.  Similarly, with sharpened spherical harmonics, we considered
+it a branch if we found additional maxima over the same range.  We terminated
+fibers when the general fractional anisotropy of the estimated signal
+(std/rms) fell below 0.1.  While such heuristics are somewhat arbitrary, we
+found little qualitative difference in adjusting these values.
+
+\begin{figure*}[t]
+  \centering
+  \subfloat[Single-tensor]{ \label{fig:1T_cc}
+    \begin{minipage}[b]{0.33\linewidth}
+      \includegraphics[width=\textwidth]{case01045_1T_cc_top} \\
+      \includegraphics[width=\textwidth]{case01045_1T_cc_front}
+    \end{minipage}}%
+  \subfloat[Spherical harmonics]{ \label{fig:SH_cc}
+    \begin{minipage}[b]{0.33\linewidth}
+      \includegraphics[width=\textwidth]{case01045_SH_cc_top}
+      \includegraphics[width=\textwidth]{case01045_SH_cc_front}%
+    \end{minipage}}%
+  \subfloat[Filtered Watson]{ \label{fig:2W_cc}
+    \begin{minipage}[b]{0.33\linewidth}
+      \includegraphics[width=\textwidth]{case01045_2W_cc_top}
+      \includegraphics[width=\textwidth]{case01045_2W_cc_front}
+    \end{minipage}}
+ \caption{Tracing fibers originating from the center of the entire corpus
+    callosum with views from above \textit{(top rows)} and front-to-back
+    \textit{(bottom rows)}.  The proposed filtered tractography is able to
+    find many of the lateral projections \textit{(blue)} while single-tensor
+    is unable to find any and few are found with sharpened spherical
+    harmonics.  Seed region indicated in yellow.}
+  \label{fig:cc}
+\end{figure*}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.8\columnwidth]{case01045_2W_cc_zoom}
+  \caption{Closeup of frontal fibers in \autoref{fig:2W_cc} viewed from
+    above.}
+  \label{fig:frontal}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \subfloat[Single-tensor]{ \label{fig:1T_ic_front}%
+    \includegraphics[width=.33\columnwidth]{case01045_1T_ic_front}}%
+  \subfloat[Spherical harmonics]{ \label{fig:SH_ic_front}%
+    \includegraphics[width=.33\columnwidth]{case01045_SH_ic_front}}%
+  \subfloat[Filtered Watson]{ \label{fig:2W_ic_front}%
+    \includegraphics[width=.33\columnwidth]{case01045_2W_ic_front}}%
+ \caption{Frontal view with seeding in the internal capsule \textit{(yellow)}.
+    While both single-tensor and spherical harmonics tend to follow the
+    dominant corticospinal tract to the primary motor cortex, the filtered
+    approach follows many more pathways.  Seed region indicated in yellow.}
+  \label{fig:ic_front}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \subfloat[Single-tensor]{ \label{fig:1T_ic_top}%
+    \includegraphics[width=.33\columnwidth]{case01045_1T_ic_top}}%
+  \subfloat[Spherical harmonics]{ \label{fig:SH_ic_top}%
+    \includegraphics[width=.33\columnwidth]{case01045_SH_ic_top}}%
+  \subfloat[Filtered Watson]{ \label{fig:2W_ic_top}%
+    \includegraphics[width=.33\columnwidth]{case01045_2W_ic_top}}%
+ \caption{View from above showing cortical insertion points for each method.
+    FA backdrop is taken near the top of the brain.  The filtered approach
+    shows more lateral insertions compared to single-tensor and spherical
+    harmonic tracts.}
+  \label{fig:ic_top}
+\end{figure}
+For the first experiment, \autoref{fig:tc} shows tracts originating from
+within a few voxels intersecting a particular coronal slice.  For a reference
+backdrop, we use a coronal slice showing the intensity of fractional
+anisotropy (FA) placed a few voxels behind the seeded coronal position.
+Keeping in mind that these fibers are intersecting or are in front of the
+image plane, this roughly shows how the fibers navigate the areas of high
+anisotropy (bright regions).  Similar to the results in
+\cite{Descoteaux2009tmi,Schultz2008}, \autoref{fig:SH_tc} shows that sharpened
+spherical harmonics only pick up a few fibers intersecting the U-shaped
+callosal radiata.  In contrast, our proposed method traces out many pathways
+consistent with the apparent anatomy.  To emphasize transcallosal tracts, we
+color as blue those fibers exiting a corridor of $\pm22\,\text{mm}$ around the
+mid-sagittal plane.  \autoref{fig:2W_zoom_tc} provides a closer inspection of
+\autoref{fig:2W_tc} where, to emphasize the underlying anatomy influencing the
+fibers, we use as a backdrop the actual coronal slice passing through the
+voxels used to seed this run.  Such results are obtained in minutes in our
+current MATLAB implementation.  At each step, the cost of reconstructing the
+signal for few sigma points approaches the cost of a few iterations of
+weighted least-squares estimation of a single tensor.
+
+For the second experiment, \autoref{fig:cc} shows a view of the whole brain to
+see the overall difference between the different methods.  Here again we
+emphasize with blue the transcallosal fibers found using the proposed filter.
+To show the various pathways infiltrating the gyri, \autoref{fig:frontal}
+provides a closeup of the frontal lobe from above (without blue emphasis).
+
+Next we examined fibers passing through the internal capsule to trace out the
+pathways reaching up into the primary motor cortex at the top of the brain as
+well as down into the hippocampal regions near the brain stem.
+\autoref{fig:ic_front} shows frontal views for each technique with seeding
+near the cerebral peduncles \textit{(yellow)}.  \autoref{fig:ic_side} shows
+this same result from a side view where we can see that the filtered approach
+picks up the corticospinal pathways.  As reported elsewhere
+\cite{Behrens2007}, single-tensor tractography follows the dominant
+corticospinal tract to the primary motor cortex.  The same pathways were also
+found with spherical harmonics.
+%
+\autoref{fig:ic_top} shows a view from above where we use a transverse FA
+image slice near the top of the brain as a backdrop so we can focus on the
+fiber endpoints.  From this we can see how each method infiltrates the sulci
+grooves, and specifically we see that the filtered method is able to
+infiltrate sulci more lateral compared to single-tensor tractography.
+
+\begin{figure*}[t]
+  \centering
+  \subfloat[Single-tensor]{ \label{fig:1T_ic_side}%
+    \includegraphics[width=.33\textwidth]{case01045_1T_ic_left}}%
+  \subfloat[Spherical harmonics]{ \label{fig:SH_ic_side}%
+    \includegraphics[width=.33\textwidth]{case01045_SH_ic_left}}%
+  \subfloat[Filtered Watson]{ \label{fig:2W_ic_side}%
+    \includegraphics[width=.33\textwidth]{case01045_2W_ic_left}}%
+ \caption{Side view with seeding in the internal capsule \textit{(yellow)}.
+    Filtered tractography finds many insertions into cortical regions of the
+    parietal and occipital lobes.  Seed region indicated in yellow.}
+  \label{fig:ic_side}
+\end{figure*}
+
+Note that in the region of intersection between the transcallosal fibers, the
+corticospinal, and the superior longitudinal fasciculus, the partial voluming
+of each of these pathways leads the filter to report several end-to-end
+connections that are not necessarily present, \eg fibers originating in the
+left internal capsule do not pass through this region, through the corpus
+callosum and then insert into the right motor cortex.  Many of the lateral
+extensions are callosal fibers that are picked up while passing through this
+juncture.  It is our hope that such connections may be avoided with the
+introduction of weighted mixtures, alternative filter formulations, or
+different heuristic choices in the algorithm.
+
+
+\chapter{Proposed Research}
+
+The goal of this thesis is to develop an accurate and reliable method of
+tracing neural pathways.  This entails development of the technique itself and
+comparison against relevant alternatives, as well as the demonstration of
+various applications.
+
+\section{Work Completed}
+The preliminary results in this proposal are contained in
+\cite{Malcolm2010watson,Rathi2009ismrm}, where we introduced this method of
+model-based filtering for tractography using compact directional functions.
+Our preliminary results indicate that these filter-based approaches to
+tractography provide superior results compared to independent streamline
+estimation.
+
+
+\section{Work Remaining}
+
+There are several phases defining the remainder of this thesis:
+
+\begin{enumerate}
+\item Efforts thus far have focused on using Watson directional functions to
+  model the local diffusion.  To show the flexibility and stability of this
+  filtering framework, we will apply this same methodology to incorporate
+  Gaussian tensor models with will require additional parameters introducing
+  further nonlinearities.
+
+\item The next phase of this thesis will then focus on weighted mixtures for
+  further flexibility in modeling partial volumes.
+
+\item We have introduced a framework for fitting a diffusion model at a
+  particular voxel based on the local signal.  However, our experience
+  suggests that it is important to take into account information beyond the
+  local signal.  Along those lines, various global techniques have been
+  proposed to estimate entire paths at once
+  \cite{Fillard2009,Reisert2009,Kreher2008}; although, these focus on full
+  connecting path and not accurate estimation of the local diffusion model.
+  Our goal here is to develop a hybrid solution:  local filtering for model
+  estimation combined with global filtering for path estimation.  For example,
+  instead of estimating a local principle diffusion direction at each point,
+  one could estimate an underlying curve to match the fiber geometry beyond a
+  single voxel \cite{Savadjiev2007}.
+
+\item We begin validation on a physical phantom \cite{Poupon2008phantom}.
+
+\item We will deliver a version of this algorithm as a Slicer module
+  (\url{http://www.slicer.org}).
+
+\item The final phase of this thesis will entail applying these techniques in
+  the context of a population study where we study the effect of local model
+  choice, \eg single- or two-tensor models.  Borrowing from our earlier work
+  on nonparametric density estimation of manifold data \cite{Malcolm2007tc},
+  we will explore the suitability of this same modeling technique to the
+  analysis of tractography data among individuals and groups.
+\end{enumerate}
+
+The completion of this thesis requires the use of a computer, a MATLAB
+license, 3D Slicer, and access to diffusion MRI from patients--all currently
+available through Georgia Tech and our collaborations.  We expect this work to
+be ready for presentation in Summer 2010.
+
+\begin{postliminary}
+\references
+\end{postliminary}
+
+\end{document}

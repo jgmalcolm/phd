@@ -1,0 +1,145 @@
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Comparison of various models within a coronal slice \subref {fig:roi} passing through the corpus callosum. In \subref {fig:signal} the original signal appears noisy. In \subref {fig:1t} a single tensor fit provides a robust estimate of the principal diffusion direction. In \subref {fig:2t} a two-tensor model is fit to planar voxels and the two axes are reported \cite {Peled2006}. In \subref {fig:sh} spherical harmonics provide a smoothed non-parametric estimate of the signal surface eliminating much of the noise seen in \subref {fig:signal} \cite {Descoteaux2007mrm}.\relax }}{15}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Slice indicating region of interest}}}{15}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Original signal}}}{15}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Single-tensor with axis}}}{15}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Two-tensor axes}}}{15}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Spherical harmonic signal}}}{15}{figure.caption.11}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Cutaway showing tractography throughout the left hemisphere colored by FA to indicate diffusion strength \cite {malcolm2009ipmi}. From this view, the fornix and cingulum bundle are visible near the center.\relax }}{16}{figure.caption.12}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Tractography from the center of the corpus callosum (seed region in yellow). The single-tensor model (left) captures only the corona radiata and misses the lateral pathways known to exist. The two-tensor method \cite {malcolm2009ipmi} (right) reveals many of these missing pathways (highlighted in blue). (From \cite {malcolm2009ipmi})\relax }}{16}{figure.caption.13}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Segmenting the corpus callosum using the graph cut technique from \cite {Malcolm2007tc} (side view). The Euclidean mapping \subref {fig:euclidean} does not take into account the structure of the underlying tensor manifold. The Riemannian mapping \subref {fig:riemannian} takes this structure into account when computing statistics and so produces a correct segmentation. (From \cite {Malcolm2007tc})\relax }}{17}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial seed regions}}}{17}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Euclidean mapping}}}{17}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Riemannian mapping}}}{17}{figure.caption.14}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Full-brain streamline tractography clustered using affinity propagation \cite {Malcolm2009cukf_ext}. Viewed from the outside (left) and inside cutting away the left hemisphere (right). Among the visible structures, we see the cingulum bundle (yellow), internal capsule (red), and arcuate (purple).\relax }}{17}{figure.caption.15}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Fronto-occipital fibers from the right hemisphere using streamline tractography and clustered into bundles \subref {fig:fo_fl} \cite {Malcolm2009cukf_ext}. Viewing the most representative fiber in each bundle \subref {fig:fo_ex} we see a fiber from one cluster (red) that appears to have wandered off the pathway. (From \cite {Malcolm2009cukf_ext})\relax }}{17}{figure.caption.16}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Original fibers}}}{17}{figure.caption.16}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Major pathways}}}{17}{figure.caption.16}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces The brain viewed as a network of weighted connections. Each edge represents a possible connection and is weighted by the strength of that path. Many techniques from network analysis are applied to reveal hubs and subnetworks within this macroscopic view.\relax }}{18}{figure.caption.17}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Plotting FA as a function of arc-length to examine local fluctuations. Fibers are selected that connect the left and right seed regions (green). Notice how the FA from single-tensor (blue) is lower in regions of crossing compared to two-tensor FA (red). (From \cite {Malcolm2009study})\relax }}{18}{figure.caption.18}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces System overview illustrating relation between the neural fibers, the measured scanner signal, and the unscented Kalman filter as it is used to estimate the local model. At each step, the filter uses its current model state ($\mathaccentV {hat}05E{\ensuremath {\@mathbf x}\xspace }_t$) to predict the observed scanner signal ($\mathaccentV {bar}016{\ensuremath {\@mathbf y}\xspace }_{t+1|t}$) and then compares that against the actual measured signal ($\ensuremath {\@mathbf y}\xspace _t$) in order to update its internal model state ($\mathaccentV {hat}05E{\ensuremath {\@mathbf x}\xspace }_{t+1}$).\relax }}{20}{figure.caption.19}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Comparison of tractography using a single-tensor model and the proposed two-component model with filtering. While the single-tensor model misses many of the lateral branches from the corpus callosum, the filter provides a stable estimate of the two-component model capable of revealing the lateral transcallosal pathways. Seed region indicated with yellow.\relax }}{21}{figure.caption.20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor streamline}}}{21}{figure.caption.20}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Two-component model}}}{21}{figure.caption.20}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Watson directional functions are capable of representing various diffusion patterns and fiber orientations.\relax }}{23}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Reconstructed signals for strong diffusivity ($k=2$), weak diffusivity ($k=0.5$), and isotropic diffusion patterns ($k=0.01$).}}}{23}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Signals for two-fiber and three-fiber mixtures.}}}{23}{figure.caption.21}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces One fiber passing through an example synthetic field and the estimated ODFs within crossing region \textit {(blue box)} using (unsharpened) spherical harmonics (SH) and the filter. The filter provides consistent angular resolution while SH modeling at those same locations sometimes misses or is off. Above and below the crossing region, the filter aligns both tensor components to fit the single-tensor signal.\relax }}{30}{figure.caption.22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Fiber passing through 60\ensuremath {^\circ }\xspace synthetic crossing.}}}{30}{figure.caption.22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Estimated ODFs along fiber.}}}{30}{figure.caption.22}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces The error in estimated crossing angle \subref {fig:2T_angle} and estimated fractional anisotropy \subref {fig:lambda_t00}-\subref {fig:lambda_t90} at various volume fractions: 50\%-50\% (top row), 60\%-40\% (middle row), 70\%-30\% (bottom row). Where appropriate, we compare among single-tensor least-squares \textit {(green)}, sharpened spherical harmonics \textit {(red)}, two-tensor Levenberg-Marquardt \textit {(blue)}, and the proposed filtered two-tensor \textit {(black)}. Through all examples, the filtered technique provides the most consistent and accurate results.\relax }}{43}{figure.caption.23}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\textbf {Angular error}}}}{43}{figure.caption.23}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\textbf {FA error, no crossing}}}}{43}{figure.caption.23}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {\textbf {FA error, 45\ensuremath {^\circ }\xspace crossing}}}}{43}{figure.caption.23}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {\textbf {FA error, 90\ensuremath {^\circ }\xspace crossing}}}}{43}{figure.caption.23}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces The filtered approach \textit {(black)} is able to resolve three-fiber crossings with improved accuracy and at sharper angles compared to using sharpened spherical harmonics \textit {(red)}. Both low-noise and high-noise experiments are shown.\relax }}{44}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Low-noise (SNR $\approx $ 10 dB)}}}{44}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {High-noise (SNR $\approx $ 5 dB)}}}{44}{figure.caption.24}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Tractography using various methods, seeded at the center of the corpus callosum. Single-tensor reconstructs only the dominate callosal radiata \subref {fig:T_1T_tc}. Spherical harmonics pick up some of the lateral branches \subref {fig:T_SH_tc}. Initializing a Levenberg-Marquardt solver with an independent single tensor estimate finds only the radiata \subref {fig:LMi_tc}, while initializing instead with its previous estimate \subref {fig:LMc_tc} finds little more than spherical harmonics. Only filtered tractography picks up the lateral paths consistent with the underlying anatomy. Fibers exiting $\pm 22\tmspace +\thinmuskip {.1667em}\text {mm}$ around the mid-sagittal plane are indicated in \textit {blue}. Seed region indicated in \textit {yellow}.\relax }}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor streamline}}}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Independent Levenberg-Marquardt two-tensor}}}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Causal Levenberg-Marquardt two-tensor}}}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Filtered two-tensor}}}{45}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {Filtered three-tensor}}}{45}{figure.caption.25}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Tracing fibers originating from the center of the entire corpus callosum with views from above \textit {(top rows)} and front-to-back \textit {(bottom rows)}. The proposed filtered tractography is able to find many of the lateral projections \textit {(blue)} while single-tensor is unable to find any and few are found with sharpened spherical harmonics. Seed region indicated in \textit {yellow}.\relax }}{46}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Streamline single-tensor}}}{46}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Streamline spherical harmonics}}}{46}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-tensor}}}{46}{figure.caption.26}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Successive snapshots of filtered two-tensor tracing from both the corpus callosum \textit {(red)} and internal capsule \textit {(yellow)}, viewed from right hemisphere. Here we see the lateral pathways from the corpus cross the motor tracts from the internal capsule.\relax }}{46}{figure.caption.27}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces The three-tensor filtered approach is able to trace through this intersection of the corticospinal tract \textit {(blue)}, corpus callosum \textit {(red)}, and superior longitudinal fasciculus \textit {(green)}.\relax }}{47}{figure.caption.28}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces A portion of the superior longitudinal fasciculus as it crosses a section of the lateral pathways emanating from the corpus callosum. These fibers were extracted using two regions of interest \textit {(yellow)}. While LM reconstructs several of these fibers, filtered estimation produces a more consistent bundle with deeper, uniform penetration into the frontal and occipital lobes. No such fibers were found using the comparison methods.\relax }}{47}{figure.caption.29}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Levenberg-Marquardt (causal) two-tensor}}}{47}{figure.caption.29}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Filtered two-tensor}}}{47}{figure.caption.29}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Tracing of the right cingulum bundle using various methods. From full-brain seeding, fibers were selected that passed through any two gates \textit {(yellow)}. While all methods here produce some false-positives (\textit {e.g}\onedot partial voluming onto the splenium, genu, or tapetum), the filtered methods appear to produce the fullest cingulum reconstructions.\relax }}{48}{figure.caption.30}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Streamline single-tensor}}}{48}{figure.caption.30}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Levenberg-Marquardt (causal) two-tensor}}}{48}{figure.caption.30}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Spherical harmonics}}}{48}{figure.caption.30}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered single-tensor}}}{48}{figure.caption.30}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Filtered two-tensor}}}{48}{figure.caption.30}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Tracing of the right inferior fronto-occipital fasciculus using various methods. From full-brain seeding, fibers were selected that passed through any two gates \textit {(yellow)}. Spherical harmonics and Levenberg-Marquardt show sparse and irregular connectivity. Filtered single- and two-tensor results appear to have deeper and more uniform penetration into the occipital lobe.\relax }}{48}{figure.caption.31}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Streamline single-tensor}}}{48}{figure.caption.31}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Levenberg-Marquardt (causal) two-tensor}}}{48}{figure.caption.31}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Spherical harmonics}}}{48}{figure.caption.31}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered single-tensor}}}{48}{figure.caption.31}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Filtered two-tensor}}}{48}{figure.caption.31}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces A view of the previous figure from above. Note the consistent deeper penetration of the filtered techniques. The two-tensor method infiltrates many minor pathways into the temporal lobe.\relax }}{49}{figure.caption.32}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Streamline single-tensor}}}{49}{figure.caption.32}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Levenberg-Marquardt (causal) two-tensor}}}{49}{figure.caption.32}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Spherical harmonics}}}{49}{figure.caption.32}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered single-tensor}}}{49}{figure.caption.32}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Filtered two-tensor}}}{49}{figure.caption.32}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Mean squared error (MSE) between reconstructed signal and ground truth signal at various crossing angles \textit {(low-noise on left, high-noise on right)}. Notice how the increased noise has little effect on the filter \textit {(black)} compared to using matching pursuit \textit {(blue)} or sharpened spherical harmonics \textit {(red)}.\relax }}{49}{figure.caption.33}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}1000}\xspace }}}{49}{figure.caption.33}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}3000}\xspace }}}{49}{figure.caption.33}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Average angle error at various crossing angles comparing all three techniques: matching pursuit \textit {(blue)}, sharpened spherical harmonics \textit {(red)}, and the proposed filter \textit {(black)}. The filter provides stable and consistent estimation compared to either alternative technique. Each subfigure shows both the low-noise and high-noise experiments \textit {(left, right)}.\relax }}{50}{figure.caption.34}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Matching pursuit, \ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}1000}\xspace }}}{50}{figure.caption.34}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Matching pursuit, \ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}3000}\xspace }}}{50}{figure.caption.34}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Spherical harmonics, \ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}1000}\xspace }}}{50}{figure.caption.34}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Spherical harmonics, \ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}3000}\xspace }}}{50}{figure.caption.34}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Filtered tractography picks up many fiber paths consistent with the underlying structures. Both single-tensor streamline and sharpened spherical harmonics are unable to find the majority of these pathways. Fibers existing $\pm 22\tmspace +\thinmuskip {.1667em}\text {mm}$ around the mid-sagittal plane are indicated in blue. Seed region indicated in yellow.\relax }}{50}{figure.caption.35}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{50}{figure.caption.35}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{50}{figure.caption.35}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-Watson}}}{50}{figure.caption.35}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered three-Watson}}}{50}{figure.caption.35}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Closeup of upper right in \autoref {fig:2W_tc} and \autoref {fig:3W_tc}.\relax }}{51}{figure.caption.36}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Filtered two-Watson}}}{51}{figure.caption.36}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Filtered three-Watson}}}{51}{figure.caption.36}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Closeup of frontal fibers in \autoref {fig:2W_cc} and \autoref {fig:3W_cc} viewed from above.\relax }}{51}{figure.caption.37}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Filtered two-Watson}}}{51}{figure.caption.37}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Filtered three-Watson}}}{51}{figure.caption.37}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Frontal view with seeding in the internal capsule \textit {(blue)}. While both single-tensor and spherical harmonics tend to follow the dominant corticospinal tract to the primary motor cortex, the filtered approach follows many more pathways. Seed region indicated in yellow.\relax }}{52}{figure.caption.38}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{52}{figure.caption.38}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{52}{figure.caption.38}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-Watson}}}{52}{figure.caption.38}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered three-Watson}}}{52}{figure.caption.38}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces View from above showing cortical insertion points for each method. FA backdrop is taken near the top of the brain. The filtered approach shows more lateral insertions compared to single-tensor and spherical harmonic tracts.\relax }}{53}{figure.caption.39}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{53}{figure.caption.39}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{53}{figure.caption.39}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-Watson}}}{53}{figure.caption.39}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered three-Watson}}}{53}{figure.caption.39}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Side view with seeding in the internal capsule \textit {(yellow)}. Filtered tractography finds many insertions into cortical regions of the parietal and occipital lobes. Seed region indicated in yellow.\relax }}{54}{figure.caption.40}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{54}{figure.caption.40}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{54}{figure.caption.40}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-Watson}}}{54}{figure.caption.40}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered three-Watson}}}{54}{figure.caption.40}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces Tracing fibers originating from the center of the entire corpus callosum with views from above \textit {(top rows)} and front-to-back \textit {(bottom rows)}. The proposed filtered tractography is able to find many of the lateral projections \textit {(blue)} while single-tensor is unable to find any and few are found with sharpened spherical harmonics. Seed region indicated in yellow.\relax }}{55}{figure.caption.41}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{55}{figure.caption.41}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{55}{figure.caption.41}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered two-Watson}}}{55}{figure.caption.41}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Filtered three-Watson}}}{55}{figure.caption.41}
+\contentsline {figure}{\numberline {4.32}{\ignorespaces Comparison of sharpened spherical harmonics \textit {(red)} against filtered approach \textit {(black)} over several different metrics: detection rate, angular resolution, estimated primary fiber weight \textit {(rows, top to bottom)}. Each column is a different primary fiber weighting. The filter provides superior detection rates, accurate angular resolution, and consistent weight estimation. Trendlines indicate mean while dashed bars indicate one standard deviation.\relax }}{59}{figure.caption.42}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {50\%-50\%}}}{59}{figure.caption.42}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {60\%-40\%}}}{59}{figure.caption.42}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {70\%-30\%}}}{59}{figure.caption.42}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {80\%-20\%}}}{59}{figure.caption.42}
+\contentsline {figure}{\numberline {4.33}{\ignorespaces Filtered tractography picks up many fiber paths consistent with the underlying structures. Both single-tensor streamline and sharpened spherical harmonics are unable to find the majority of these pathways. Seed region indicated in yellow.\relax }}{60}{figure.caption.43}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{60}{figure.caption.43}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{60}{figure.caption.43}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered}}}{60}{figure.caption.43}
+\contentsline {figure}{\numberline {4.34}{\ignorespaces Tracing fibers originating from the center of the entire corpus callosum viewed from above. The proposed filtered tractography is able to find many of the lateral projections \textit {(blue)} while single-tensor is unable to find any and few are found with sharpened spherical harmonics. Seed region indicated in yellow.\relax }}{61}{figure.caption.44}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor}}}{61}{figure.caption.44}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Spherical harmonics}}}{61}{figure.caption.44}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Filtered}}}{61}{figure.caption.44}
+\contentsline {figure}{\numberline {5.35}{\ignorespaces Baseline image from the synthetic phantom (3mm, \ensuremath {b\tmspace -\thinmuskip {.1667em}=\tmspace -\thinmuskip {.1667em}1500}\xspace ) overlayed with ground truth and selected fiber tracts (colored) and seed points (white). The filter is capable of tracing through regions of crossing, branching, and fanning.\relax }}{64}{figure.caption.45}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Ground truth}}}{64}{figure.caption.45}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Filtered tractography}}}{64}{figure.caption.45}
+\contentsline {figure}{\numberline {6.36}{\ignorespaces For each patient, we seed in three different cortical regions and select only those fibers that connect the hemispheres.\relax }}{69}{figure.caption.46}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Seed regions}}}{69}{figure.caption.46}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\textit {Caudalmiddle frontal}\xspace }}}{69}{figure.caption.46}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {\textit {Precentral}\xspace }}}{69}{figure.caption.46}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {\textit {Superiorfrontal}\xspace }}}{69}{figure.caption.46}
+\contentsline {figure}{\numberline {6.37}{\ignorespaces Single-tensor tractography finds no connections. Two-tensor passes through the region of crossing \textit {(red/yellow boundary)}. FA curves show drop in single-tensor FA \textit {(blue)} in this region \textit {(indicated by dashed white line)}.\relax }}{70}{figure.caption.47}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor.}}}{70}{figure.caption.47}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Two-tensor and FA curves}}}{70}{figure.caption.47}
+\contentsline {figure}{\numberline {6.38}{\ignorespaces Two-tensor fibers overlayed with FA intensity using both models \textit {(red to yellow is low to high)}. Both methods show high FA in the corpus callosum but single-tensor FA drops as fibers enter the gray matter.\relax }}{71}{figure.caption.48}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Single-tensor FA.}}}{71}{figure.caption.48}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Two-tensor FA.}}}{71}{figure.caption.48}
+\contentsline {figure}{\numberline {6.39}{\ignorespaces Estimated fractional anisotropy (FA) using single-tensor \textit {(blue)} and two-tensor \textit {(red)} models on synthetic data with known FA \textit {(dashed black)}. The two-tensor model accurately captures the FA across a wide range of angles and eigenvalues.\relax }}{72}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Fixed eigenvalues}}}{72}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {No crossing}}}{72}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Crossing at 45\ensuremath {^\circ }\xspace }}}{72}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Crossing at 90\ensuremath {^\circ }\xspace }}}{72}{figure.caption.49}
+\contentsline {figure}{\numberline {6.40}{\ignorespaces Average of various tensor metrics as a function of arc-length using single-tensor \textit {(blue)} and two-tensor \textit {(red)} models comparing normal patients \textit {(solid lines)} with schizophrenic patients \textit {(dotted lines)}. Rows show FA, trace, eigenvalue ratio. Areas of statistical significance are indicated along the bottom \textit {(black dashes indicate 95\% confidence)}. While each metric generally indicates the same area of significance \textit {(looking down columns}), the areas of significance vary with each model \textit {(comparing red and blue)}\relax }}{73}{figure.caption.50}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\textit {Caudalmiddle frontal}\xspace }}}{73}{figure.caption.50}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\textit {Precentral}\xspace }}}{73}{figure.caption.50}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {\textit {Superiorfrontal}\xspace }}}{73}{figure.caption.50}

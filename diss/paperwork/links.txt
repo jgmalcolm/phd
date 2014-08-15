@@ -1,0 +1,9 @@
+deadlines -GT
+http://www.gradadmiss.gatech.edu/thesis/thesisdeadlines.php
+
+deadlines - forms etc at ECE:
+http://www.ece.gatech.edu/academics/internal/graduate/degree_petition/index.html
+
+
+required forms:
+http://www.gradadmiss.gatech.edu/thesis/forms.php

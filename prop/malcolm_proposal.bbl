@@ -1,0 +1,276 @@
+\begin{thebibliography}{10}
+
+\bibitem{Alexander2001}
+{\sc Alexander, A.}, {\sc Hasan, K.}, {\sc Tsuruda, J.}, and {\sc Parker, D.},
+  ``Analysis of partial volume effects in diffusion-tensor {MRI},'' {\em
+  Magnetic Resonance in Medicine}, vol.~45, pp.~770--780, 2001.
+
+\bibitem{Alexander2005nyas}
+{\sc Alexander, D.~C.}, ``Multiple-fiber reconstruction algorithms for
+  diffusion {MRI},'' {\em Annals of the New York Academy of Sciences},
+  vol.~1046, no.~1, pp.~113--133, 2005.
+
+\bibitem{Alexander2002}
+{\sc Alexander, D.~C.}, {\sc Barker, G.}, and {\sc Arridge, S.}, ``Detection
+  and modeling of non-{Gaussian} apparent diffusion coefficient profiles in
+  human brain data,'' {\em Magnetic Resonance in Medicine}, vol.~48,
+  pp.~331--340, 2002.
+
+\bibitem{Anderson2005}
+{\sc Anderson, A.}, ``Measurement of fiber orientation distributions using high
+  angular resolution diffusion imaging,'' {\em Magnetic Resonance in Medicine},
+  vol.~54, no.~5, pp.~1194--1206, 2005.
+
+\bibitem{Anwander2007}
+{\sc Anwander, A.}, {\sc Descoteaux, M.}, and {\sc Deriche, R.},
+  ``Probabilistic {Q-Ball} tractography solves crossings of the callosal
+  fibers,'' in {\em Human Brain Mapping}, p.~342, 2007.
+
+\bibitem{Basser2000}
+{\sc Basser, P.}, {\sc Pajevic, S.}, {\sc Pierpaoli, C.}, {\sc Duda, J.}, and
+  {\sc Aldroubi, A.}, ``In vivo fiber tractography using {DT-MRI} data,'' {\em
+  Magnetic Resonance in Medicine}, vol.~44, pp.~625--632, 2000.
+
+\bibitem{Behrens2007}
+{\sc Behrens, T.}, {\sc Johansen-Berg, H.}, {\sc Jbabdi, S.}, {\sc Rushworth,
+  M.}, and {\sc Woolrich, M.}, ``Probabilistic diffusion tractography with
+  multiple fibre orientations: What can we gain?,'' {\em NeuroImage}, vol.~34,
+  pp.~144--155, 2007.
+
+\bibitem{Bjornemo2002}
+{\sc Bj\"ornemo, M.}, {\sc Brun, A.}, {\sc Kikinis, R.}, and {\sc Westin,
+  C.-F.}, ``Regularized stochastic white matter tractography using diffusion
+  tensor {MRI},'' in {\em Medical Image Computing and Computer Assisted
+  Intervention (MICCAI)}, pp.~435--442, 2002.
+
+\bibitem{Deriche2009}
+{\sc Deriche, R.}, {\sc Calder, J.}, and {\sc Descoteaux, M.}, ``Optimal
+  real-time {Q-Ball} imaging using regularized {Kalman} filtering with
+  incremental orientation sets,'' {\em Medical Image Analysis}, vol.~13, no.~4,
+  pp.~564--579, 2009.
+
+\bibitem{Descoteaux2007mrm}
+{\sc Descoteaux, M.}, {\sc Angelino, E.}, {\sc Fitzgibbons, S.}, and {\sc
+  Deriche, R.}, ``Regularized, fast, and robust analytical {Q}-ball imaging,''
+  {\em Magnetic Resonance in Medicine}, vol.~58, pp.~497--510, 2007.
+
+\bibitem{Descoteaux2007}
+{\sc Descoteaux, M.}, {\sc Deriche, R.}, and {\sc Anwander, A.},
+  ``Deterministic and probabilistic {Q}-ball tractography: from diffusion to
+  sharp fiber distributions,'' Tech. Rep. 6273, INRIA, 2007.
+
+\bibitem{Descoteaux2009tmi}
+{\sc Descoteaux, M.}, {\sc Deriche, R.}, {\sc Knoesche, T.}, and {\sc Anwander,
+  A.}, ``Deterministic and probabilistic tractography based on complex fiber
+  orientation distributions,'' {\em Trans. on Med. Imag.}, vol.~28, no.~2,
+  pp.~269--286, 2009.
+
+\bibitem{Fillard2009}
+{\sc Fillard, P.}, {\sc Poupon, C.}, and {\sc Mangin, J.-F.}, ``A novel global
+  tractography algorithm based on an adaptive spin glass model,'' in {\em
+  Medical Image Computing and Computer Assisted Intervention (MICCAI)},
+  pp.~927--934, 2009.
+
+\bibitem{Frank2002}
+{\sc Frank, L.}, ``Characterization of anisotropy in high angular resolution
+  diffusion-weighted {MRI},'' {\em Magnetic Resonance in Medicine}, vol.~47,
+  pp.~1083--1099, 2002.
+
+\bibitem{Gossl2002}
+{\sc G\"ossl, C.}, {\sc Fahrmeir, L.}, {\sc P\:utz, B.}, {\sc Auer, L.}, and
+  {\sc Auer, D.}, ``Fiber tracking from {DTI} using linear state space models:
+  Detectability of the pyramidal tract,'' {\em NeuroImage}, vol.~16,
+  pp.~378--388, 2002.
+
+\bibitem{Guo2006}
+{\sc Guo, W.}, {\sc Zeng, Q.}, {\sc Chen, Y.}, and {\sc Liu, Y.}, ``Using
+  multiple tensor deflection to reconstruct white matter fiber traces with
+  branching,'' in {\em Int. Symp. on Biomedical Imaging}, pp.~69--72, 2006.
+
+\bibitem{Hagmann2004}
+{\sc Hagmann, P.}, {\sc Reese, T.}, {\sc Tseng, W.-Y.}, {\sc Meuli, R.}, {\sc
+  Thiran, J.-P.}, and {\sc Wedeen, V.~J.}, ``Diffusion spectrum imaging
+  tractography in complex cerebral white matter: An investigation of the
+  centrum semiovale,'' in {\em Int. Symp. on Magnetic Resonance in Medicine
+  (ISMRM)}, p.~623, 2004.
+
+\bibitem{Hess2006}
+{\sc Hess, C.}, {\sc Mukherjee, P.}, {\sc Han, E.}, {\sc Xu, D.}, and {\sc
+  Vigneron, D.}, ``Q-ball reconstruction of multimodal fiber orientations using
+  the spherical harmonic basis,'' {\em Magnetic Resonance in Medicine},
+  vol.~56, pp.~104--117, 2006.
+
+\bibitem{Hosey2005}
+{\sc Hosey, T.}, {\sc Williams, G.}, and {\sc Ansorge, R.}, ``Inference of
+  multiple fiber orientations in high angular resolution diffusion imaging,''
+  {\em Magnetic Resonance in Medicine}, vol.~54, pp.~1480--1489, 2005.
+
+\bibitem{Jansons2003}
+{\sc Jansons, K.} and {\sc Alexander, D.~C.}, ``Persistent angular structure:
+  New insights from diffusion {MRI} data,'' {\em Inverse Problems}, vol.~19,
+  pp.~1031--1046, 2003.
+
+\bibitem{Jian2007dot}
+{\sc Jian, B.} and {\sc Vemuri, B.}, ``A unified computational framework for
+  deconvolution to reconstruct multiple fibers from diffusion weighted {MRI},''
+  {\em Trans. on Med. Imag.}, vol.~26, no.~11, pp.~1464--1471, 2007.
+
+\bibitem{Julier2004}
+{\sc Julier, S.} and {\sc Uhlmann, J.}, ``Unscented filtering and nonlinear
+  estimation,'' {\em {IEEE}}, vol.~92, no.~3, pp.~401--422, 2004.
+
+\bibitem{Kaden2007}
+{\sc Kaden, E.}, {\sc Kn{\o}sche, T.}, and {\sc Anwander, A.}, ``Parametric
+  spherical deconvolution: Inferring anatomical connectivity using diffusion
+  {MR} imaging,'' {\em NeuroImage}, vol.~37, pp.~474--488, 2007.
+
+\bibitem{Kreher2008}
+{\sc Kreher, B.}, {\sc Madeer, I.}, and {\sc Kiselev, V.}, ``Gibbs tracking: A
+  novel approach for the reconstruction of neuronal pathways,'' {\em Magnetic
+  Resonance in Medicine}, vol.~60, pp.~953--963, 2008.
+
+\bibitem{Kreher2005}
+{\sc Kreher, B.}, {\sc Schneider, J.}, {\sc Mader, I.}, {\sc Martin, E.}, {\sc
+  Hennig, J.}, and {\sc Il'yasov, K.}, ``Multitensor approach for analysis and
+  tracking of complex fiber configurations,'' {\em Magnetic Resonance in
+  Medicine}, vol.~54, pp.~1216--1225, 2005.
+
+\bibitem{Kumar2008}
+{\sc Kumar, R.}, {\sc Barmpoutis, A.}, {\sc Vemuri, B.~C.}, {\sc Carney,
+  P.~R.}, and {\sc Mareci, T.~H.}, ``Multi-fiber reconstruction from {DW-MRI}
+  using a continuous mixture of von {Mises-Fisher} distributions,'' in {\em
+  Mathematical Methods in Biomedical Image Analysis (MMBIA)}, pp.~1--8, 2008.
+
+\bibitem{Lefebvre2004}
+{\sc Lefebvre, T.}, {\sc Bruyninckx, H.}, and {\sc Schutter, J.~D.}, ``Kalman
+  filters for non-linear systems: a comparison of performance,'' {\em
+  International Journal of Control}, vol.~77, no.~7, pp.~639--653, 2004.
+
+\bibitem{Malcolm2007tc}
+{\sc Malcolm, J.}, {\sc Rathi, Y.}, and {\sc Tannenbaum, A.}, ``A graph cut
+  approach to image segmentation in tensor space,'' in {\em Component Analysis
+  Methods (in CVPR)}, pp.~1--8, 2007.
+
+\bibitem{Malcolm2010watson}
+{\sc Malcolm, J.~G.}, {\sc Michailovich, O.}, {\sc Bouix, S.}, {\sc Westin,
+  C.-F.}, {\sc Shenton, M.~E.}, and {\sc Rathi, Y.}, ``A filtered approach to
+  neural tractography using the {Watson} directional function,'' {\em Medical
+  Image Analysis}, vol.~14, pp.~58--69, 2010.
+
+\bibitem{Mallat1993}
+{\sc Mallat, S.} and {\sc Zhang, Z.}, ``Matching pursuits with time-frequency
+  dictionaries,'' {\em Trans. on Signal Processing}, vol.~41, pp.~3397--3415,
+  1993.
+
+\bibitem{McGraw2006}
+{\sc McGraw, T.}, {\sc Vemuri, B.}, {\sc Yezierski, B.}, and {\sc Mareci, T.},
+  ``Von {Mises-Fisher} mixture model of the diffusion {ODF},'' in {\em Int.
+  Symp. on Biomedical Imaging}, pp.~65--68, 2006.
+
+\bibitem{Ozarslan2006}
+{\sc \"Ozarslan, E.}, {\sc Shepherd, T.}, {\sc Vemuri, B.}, {\sc Blackband,
+  S.}, and {\sc Mareci, T.}, ``Resolution of complex tissue microarchitecture
+  using the diffusion orientation transform,'' {\em NeuroImage}, vol.~31,
+  no.~3, pp.~1086--1103, 2006.
+
+\bibitem{Savadjiev2007}
+{\sc P.~Savadjiev, S. W. Z. . K.~S.}, ``On the differential geometry of {3D}
+  flow patterns: Generalized helicoids and diffusion {MRI} analysis,'' in {\em
+  Int. Conf. on Computer Vision}, 2007.
+
+\bibitem{Parker2003}
+{\sc Parker, G.} and {\sc Alexander, D.~C.}, ``Probabilistic {Monte Carlo}
+  based mapping of cerebral connections utilizing whole-brain crossing fiber
+  information,'' in {\em Information Processing in Medical Imaging (IPMI)},
+  pp.~684--696, 2003.
+
+\bibitem{Parker2005}
+{\sc Parker, G.} and {\sc Alexander, D.~C.}, ``Probabilistic anatomical
+  connectivity derived from the microscopic persistent angular structure of
+  cerebral tissue,'' {\em Phil. Trans. R. Soc. B}, vol.~360, pp.~893--902,
+  2005.
+
+\bibitem{Peled2006}
+{\sc Peled, S.}, {\sc Friman, O.}, {\sc Jolesz, F.}, and {\sc Westin, C.-F.},
+  ``Geometrically constrained two-tensor model for crossing tracts in {DWI},''
+  {\em Magnetic Resonance in Medicine}, vol.~24, no.~9, pp.~1263--1270, 2006.
+
+\bibitem{Poupon2008phantom}
+{\sc Poupon, C.}, {\sc Rieul, B.}, {\sc Kezele, I.}, {\sc Perrin, M.}, {\sc
+  Poupon, F.}, and {\sc Mangin, J.~F.}, ``New diffusion phantoms dedicated to
+  the study and validation of high-angular-resolution diffusion imaging
+  ({HARDI}) models,'' {\em Magnetic Resonance in Medicine}, vol.~60, no.~6,
+  pp.~1276--83, 2008.
+
+\bibitem{Poupon2008}
+{\sc Poupon, C.}, {\sc Roche, A.}, {\sc Dubois, J.}, {\sc Mangin, J.-F.}, and
+  {\sc Poupon, F.}, ``Real-time {MR} diffusion tensor and {Q-ball} imaging
+  using {Kalman} filtering,'' {\em Medical Image Analysis}, vol.~12, no.~5,
+  pp.~527--534, 2008.
+
+\bibitem{Rathi2009ismrm}
+{\sc Rathi, Y.}, {\sc Malcolm, J.}, {\sc Bouix, S.}, {\sc Westin, C.-F.}, {\sc
+  Kubicki, M.}, and {\sc Shenton, M.~E.}, ``Mixture model for estimating fiber
+  {ODF} and multi-directional tractography,'' in {\em Int. Symp. on Magnetic
+  Resonance in Medicine (ISMRM)}, p.~3548, 2009.
+
+\bibitem{Rathi2009mia_w}
+{\sc Rathi, Y.}, {\sc Michailovich, O.}, {\sc Shenton, M.~E.}, and {\sc Bouix,
+  S.}, ``Directional functions for orientation distribution estimation,'' {\em
+  Medical Image Analysis}, vol.~13, pp.~432--444, 2009.
+
+\bibitem{Reisert2009}
+{\sc Reisert, M.}, {\sc Mader, I.}, and {\sc Kiselev, V.}, ``Global
+  reconstruction of neuronal fibres,'' in {\em Diffusion Modeling and Fiber Cup
+  (in MICCAI)}, pp.~70--81, 2009.
+
+\bibitem{Schultz2008}
+{\sc Schultz, T.} and {\sc Seidel, H.}, ``Estimating crossing fibers: A tensor
+  decomposition approach,'' {\em Trans. on Visualization and Computer
+  Graphics}, vol.~14, no.~6, pp.~1635--1642, 2008.
+
+\bibitem{Tournier2007}
+{\sc Tournier, J.-D.}, {\sc Calamante, F.}, and {\sc Connelly, A.}, ``Robust
+  determination of the fibre orientation distribution in diffusion {MRI}:
+  Non-negativity constrained super-resolved spherical deconvolution,'' {\em
+  NeuroImage}, vol.~35, pp.~1459--1472, 2007.
+
+\bibitem{Tournier2004}
+{\sc Tournier, J.-D.}, {\sc Calamante, F.}, {\sc Gadian, D.}, and {\sc
+  Connelly, A.}, ``Direct estimation of the fiber orientation density function
+  from diffusion-weighted {MRI} data using spherical deconvolution,'' {\em
+  NeuroImage}, vol.~23, pp.~1176--1185, 2004.
+
+\bibitem{Tuch2004}
+{\sc Tuch, D.}, ``Q-ball imaging,'' {\em Magnetic Resonance in Medicine},
+  vol.~52, pp.~1358--1372, 2004.
+
+\bibitem{Tuch2002}
+{\sc Tuch, D.}, {\sc Reese, T.}, {\sc Wiegell, M.}, {\sc Makris, N.}, {\sc
+  Belliveau, J.}, and {\sc Wedeen, V.}, ``High angular resolution diffusion
+  imaging reveals intravoxel white matter fiber heterogeneity,'' {\em Magnetic
+  Resonance in Medicine}, vol.~48, pp.~577--582, 2002.
+
+\bibitem{Merwe2003}
+{\sc van~der Merwe, R.} and {\sc Wan, E.}, ``Sigma-point {Kalman} filters for
+  probabilistic inference in dynamic state-space models,'' in {\em Workshop on
+  Advances in Machine Learning}, 2003.
+
+\bibitem{Zhan2006}
+{\sc Zhan, W.} and {\sc Yang, Y.}, ``How accurately can the diffusion profiles
+  indicate multiple fiber orientations? {A} study on general fiber crossings in
+  diffusion {MRI},'' {\em J. of Magnetic Resonance}, vol.~183, pp.~193--202,
+  2006.
+
+\bibitem{Zhang2009}
+{\sc Zhang, F.}, {\sc Hancock, E.}, {\sc Goodlett, C.}, and {\sc Gerig, G.},
+  ``Probabilistic white matter fiber tracking using particle filtering and von
+  {Mises-Fisher} sampling,'' {\em Medical Image Analysis}, vol.~13, pp.~5--18,
+  2009.
+
+\bibitem{Zhukov2002}
+{\sc Zhukov, L.} and {\sc Barr, A.}, ``Oriented tensor reconstruction: Tracing
+  neural pathways from diffusion tensor {MRI},'' in {\em Visualization},
+  pp.~387--394, 2002.
+
+\end{thebibliography}

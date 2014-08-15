@@ -1,0 +1,136 @@
+;; RefTeX parse info file
+;; File: /Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex
+;; User: malcolm (James Malcolm)
+
+(set reftex-docstruct-symbol '(
+
+
+(xr nil "\\\\\\\\\\\\")
+
+(index-tags)
+
+(is-multi nil)
+
+(bibview-cache)
+
+(master-dir . "/Users/malcolm/junk/writeups/thesis/proposal/")
+
+(label-numbers)
+
+(bof "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex")
+
+(toc "toc" "  1 Research Topic" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 1 "1" "\\chapter{Research Topic}" 4386)
+
+(toc "toc" "    1.1 Introduction" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 2 "1.1" "\\section{Introduction}" 4412)
+
+("fig:sweetness" "f" "Single-tensor tractography misses many of the lateral branches from the corpus callosum. The propose" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "    1.2 Filtered Tractography" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 2 "1.2" "\\section{Filtered Tractography}" 9697)
+
+("fig:overview" "f" "System overview illustrating relation between the neural fibers, the scanner signals, and the unscen" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      1.2.1 Modeling local fiber orientations" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "1.2.1" "\\subsection{Modeling local fiber orientations}" 12567)
+
+("sec:model" "s" "In diffusion weighted imaging, image contrast is related to the strength of water diffusion, and our" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:general_model" "e" "s_i = s_0 \\sum_j w_j e^{ -b \\u_i^T D_j \\u_i }, " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:model_2T" "e" "s_i = \\tfrac{s_0}{2} e^{ -b \\u_i^T D_1 \\u_i } + \\tfrac{s_0}{2} e^{ -b \\u_i^T D_2 \\u_i } , " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:model_3T" "e" "s_i = \\frac{s_0}{3} \\sum_{j=1}^3 e^{-b \\u_i^T D_j \\u_i } , " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      1.2.2 Estimating the fiber model" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "1.2.2" "\\subsection{Estimating the fiber model}" 19282)
+
+("sec:estimation" "s" "Given the measured scanner signal at a particular voxel, we want to estimate the underlying model pa" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:state" "e" "\\x = \\rv{\\m_1 \\;\\; \\lx_1 \\;\\; \\ly_1 \\;\\; \\m_2 \\;\\; \\lx_2 \\;\\; \\ly_2}^T , " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:state_3T" "e" "\\x = \\rv{\\m_1 \\;\\; \\lx_1 \\;\\; \\ly_1 \\;\\; \\m_2 \\;\\; \\lx_2 \\;\\; \\ly_2 \\;\\; \\m_3 \\;\\; \\lx_3 \\;\\; \\ly_3}" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:sigma_points" "e" "\\x_{i} = \\x_t + \\left[\\sqrt{(n+\\kappa)P_t}\\right]_i \\quad \\x_{i+n} = \\x_t - \\left[\\sqrt{(n+\\kappa)P_" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:Pxx" "e" "P_{xx} = \\sum_i w_i \\left(\\hat{\\x}_i - \\bar{\\x}_{t+1|t}\\right) \\left(\\hat{\\x}_i - \\bar{\\x}_{t+1|t}\\r" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:Pyy" "e" "P_{yy} = \\sum_i w_i \\left(\\hat{\\y}_i - \\bar{\\y}_{t+1|t}\\right) \\left(\\hat{\\y}_i - \\bar{\\y}_{t+1|t}\\r" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:Pxy" "e" "P_{xy} = \\sum_i w_i \\left(\\hat{\\x}_i - \\bar{\\x}_{t+1|t}\\right) \\left(\\hat{\\y}_i - \\bar{\\y}_{t+1|t}\\r" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("alg:ukf" "s" "\\begin{algorithmic}[1] \\STATE Form weighted sigma points $\\X_t=\\{w_i, \\x_i\\}_{i=0}^{2n}$ around curr" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:x_" "e" "\\x_{t+1} = \\bar{\\x}_{t+1|t} + K(\\y_t - \\bar{\\y}_{t+1|t}) " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("eq:P_" "e" "P_{t+1} = P_{xx} - K P_{yy} K^T , " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      1.2.3 The algorithm" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "1.2.3" "\\subsection{The algorithm}" 27741)
+
+("sec:alg" "s" "\\begin{algorithm}[t] \\setlength\\abovedisplayskip{2pt} \\setlength\\belowdisplayskip{2pt} \\caption{Main" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("alg:loop" "s" "\\begin{algorithmic}[1] \\REPEAT \\STATE Form the sigma points $\\X_t$ around $\\x_t$ \\STATE Predict the " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "  2 Preliminary Results" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 1 "2" "\\chapter{Preliminary Results}" 29445)
+
+("fig:samples" "f" "Synthetic two-fiber voxel signal at a 60\\deg angle \\textit{(black wires indicate axes)} showing the " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      2.0.1 Signal reconstruction and angular resolution" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "2.0.1" "\\subsection{Signal reconstruction and angular resolution}" 29476)
+
+("sec:mse_angle" "s" "While the independent optimization techniques can be run on individually generated voxels, care must" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:mse" "f" "Mean squared error (MSE) between reconstructed signal and ground truth signal at various crossing an" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:angle_MP_1000" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:angle_MP_3000" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:angle_SH_1000" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:angle_SH_3000" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:angle" "f" "Average angle error at various crossing angles comparing all three techniques: matching pursuit \\tex" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:crossing" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:zooms" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:fibers" "f" "Closeup of the estimated ODFs of several neighboring voxels estimated within the crossing region at " "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:1T_tc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:SH_tc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:2T_tc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:2T_zoom_tc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:tc" "f" "Filtered tractography \\subref{fig:2T_tc},\\subref{fig:2T_zoom_tc} picks up many fiber paths consisten" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:1T_cc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:SH_cc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:2T_cc" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:frontal_fibers" "f" "NO MATCH FOR CONTEXT REGEXP" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:cc" "f" "Tracing fibers originating from the center of the entire corpus callosum with views from above \\text" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      2.0.2 Synthetic tractography" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "2.0.2" "\\subsection{Synthetic tractography}" 29476)
+
+("sec:tracts" "s" "Having verified the technique's accuracy, we now turn to the resulting tractography. \\autoref{fig:cr" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "      2.0.3 Tractography on real data" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 3 "2.0.3" "\\subsection{Tractography on real data}" 29476)
+
+("sec:real" "s" "We tested our approach on a real human brain scan of 51 diffusion weighted images with voxel size of" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "  3 Proposed Research" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 1 "3" "\\chapter{Proposed Research}" 52503)
+
+("fig:fa" "f" "Plotting fractional anisotropy (FA) along the length of a selected fiber bundle to examine local flu" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+("fig:rh" "f" "Clustering of pathways in the right hemisphere. On the left, we view all of the single-tensor cluste" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil)
+
+(toc "toc" "    3.1 Work Completed" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 2 "3.1" "\\section{Work Completed}" 52781)
+
+(toc "toc" "    3.2 Work Remaining" "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex" nil 2 "3.2" "\\section{Work Remaining}" 53174)
+
+(eof "/Users/malcolm/junk/writeups/thesis/proposal/malcolm_proposal.tex")
+))
+
