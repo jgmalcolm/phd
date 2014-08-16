@@ -249,7 +249,7 @@ out pathways.
   \centering
   \includegraphics[width=.8\columnwidth]{case01045_2T_half_fa}%
  \caption{Cutaway showing tractography throughout the left hemisphere colored
-   by FA to indicate diffusion strength \cite{malcolm2009ipmi}.  From this
+   by FA to indicate diffusion strength \cite{Malcolm2009ipmi}.  From this
    view, the fornix and cingulum bundle are visible near the center.}
   \label{fig:rh_fa}
 \end{figure}
@@ -481,8 +481,8 @@ and visualization of diffusion images.  For a comprehensive view, we suggest
   \caption{Tractography from the center of the corpus callosum (seed region in
     yellow).  The single-tensor model (left) captures only the corona radiata
     and misses the lateral pathways known to exist.  The two-tensor method
-    \cite{malcolm2009ipmi} (right) reveals many of these missing pathways
-    (highlighted in blue). (From \cite{malcolm2009ipmi})}
+    \cite{Malcolm2009ipmi} (right) reveals many of these missing pathways
+    (highlighted in blue). (From \cite{Malcolm2009ipmi})}
   \label{fig:filtered}
 \end{figure}
 
@@ -524,12 +524,12 @@ Since individual voxel measurements may be unreliable, several techniques have
 been developed for regularization.  For example, using the estimate from the
 previous position \cite{Lazar2003,Zhukov2002} as well as filtering
 formulations for path regularization \cite{Gossl2002} and model-based
-estimation \cite{malcolm2009ipmi}.
+estimation \cite{Malcolm2009ipmi}.
 %
 The choice of model and optimization mechanism can drastically effect the
 final tracts.  To illustrate, \autoref{fig:filtered} shows tractography from
 the center of the corpus callosum using a single-tensor model and a two-tensor
-model using the filtered technique from \cite{malcolm2009ipmi}.
+model using the filtered technique from \cite{Malcolm2009ipmi}.
 
 
 
@@ -944,7 +944,7 @@ such as axon diameter and degree of myelination
 starting with the diffusion tensor on up to various mixture models as well as
 high-order tensors.  Work continues to develop more accurate and reliable
 model estimation by incorporating information from neighboring voxels
-\cite{Savadjiev2008,malcolm2009ipmi}.  Further, scalar measures derived from
+\cite{Savadjiev2008,Malcolm2009ipmi}.  Further, scalar measures derived from
 these models similarly benefit from incorporating neighborhood information
 \cite{Savadjiev2009}.
 
@@ -1026,7 +1026,7 @@ local minima are naturally avoided.
 %
 This approach generalizes to arbitrary fiber model with finite dimensional
 parameter space.  The bulk of this dissertation is found among
-\cite{malcolm2010tmi,malcolm2009ipmi,malcolm2009cukf}.
+\cite{malcolm2010tmi,Malcolm2009ipmi,malcolm2009cukf}.
 
 Several studies have specific relevance to this present work because of their
 use of a filtering strategy in either orientation estimation or tractography.
@@ -1086,7 +1086,7 @@ constant, $w_j$ are convex weights, and $D_j$ is a tensor matrix describing a
 diffusion pattern.
 
 We now provide definition to the two primary models employed in this work:
-equally weighted diffusion tensors \cite{malcolm2009ipmi,malcolm2010tmi} and
+equally weighted diffusion tensors \cite{Malcolm2009ipmi,malcolm2010tmi} and
 Watson directional functions\cite{Rathi2009mia_w}.  Later in
 \autoref{ch:weighted}, we return to extend the method to weighted mixtures of
 diffusion tensors which requires a different filtering scheme
@@ -1559,7 +1559,7 @@ the average eigenvalues among these voxels:  $\{1200, 100, 100\}\mu$m$^2$/msec
 tensor at \bone s/mm$^2$ using 81 gradient directions uniformly spread on the
 hemisphere.  We assume $s_0=1$ and introduce Rician noise (\snr{5}).  For
 extra experiments at \bthree and alternative noise levels, one can refer to an
-earlier conference version of this work \cite{malcolm2009ipmi}.
+earlier conference version of this work \cite{Malcolm2009ipmi}.
 
 In these experiments, we compare against several techniques selected to
 represent standard alternative models and fitting procedures.
@@ -1721,7 +1721,7 @@ with 5\deg error in the equally weighted field (50-50) \textit{(top row)} with
 performance degrading little in the 60-40 field \textit{(middle)}.  In the
 70-30 field \textit{(bottom)}, the trendlines begin to show an asymptotic
 limit to performance, yet the filter is the only method capable of reasonable
-estimates at large angles.  See \citet{malcolm2009ipmi} for additional
+estimates at large angles.  See \citet{Malcolm2009ipmi} for additional
 experiments at both \bone and \bthree.  From these trendlines, one can
 conclude that the filtered approach provides accurate and consistent angular
 resolution at crossing angles far below independent estimation.
@@ -2993,7 +2993,7 @@ regarding the results reported using the single-tensor model.
 Specifically, we compare various tensor metrics as estimated using two-tensor
 and single-tensor models on a number of fiber tracts generated using our
 recently proposed method for deterministic two-tensor tractography
-\cite{malcolm2009ipmi}.  Hence we are continuing this work with a focus
+\cite{Malcolm2009ipmi}.  Hence we are continuing this work with a focus
 on how such techniques will begin affecting clinical studies.  It is important
 to note that this is the first time the same population study has been
 performed using two different underlying models.
@@ -3057,7 +3057,7 @@ that connect each hemisphere.  Specifically, the regions are the \red, \blue,
 and \green.
 
 We followed the deterministic fiber tracking procedure in
-\cite{malcolm2009ipmi}.  We begin by seeding each algorithm several times
+\cite{Malcolm2009ipmi}.  We begin by seeding each algorithm several times
 in each voxel of the seed regions.  To explore branchings found using the
 proposed technique, we considered a component to be branching if it was
 separated from the primary component by less than 40\deg with FA$\ge$0.15.  We
@@ -3087,7 +3087,7 @@ only studying portions of the corpus radiata, typically focusing on the
 splenum and genu \cite{Corouge2006,Fletcher2007ipmi,Goodlett2008,Maddah2008}.
 %
 One of the main advantages of using the multi-tensor filtering approach in
-\cite{malcolm2009ipmi} is that it is one of the few techniques capable of
+\cite{Malcolm2009ipmi} is that it is one of the few techniques capable of
 following, not only these dominate pathways, but also the transcallosal
 pathways out to the lateral gyri.  For example, \autoref{fig:03_1T} shows that
 for the \green region, using single-tensor tractography leads to nearly all
